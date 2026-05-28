@@ -1,0 +1,61 @@
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1518398046578-8cca57782e17?auto=format&fit=crop&q=80" alt="Our Services">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="page-title animated-fade-up">Curated <span class="highlight-beige">Experiences</span></h1>
+    <p class="page-subtitle animated-fade-up" style="animation-delay: 0.2s">Everything you need for a seamless and unforgettable journey.</p>
+  </div>
+</section>
+
+<app-services></app-services>
+
+<section class="school-tours section-padding">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Educational Excursions" subtitle="Curated tour packages designed specifically for schools and colleges."></app-animated-heading>
+
+    <div class="tours-wrapper">
+      <!-- One Day Tours -->
+      <div class="tour-category glass-card">
+        <div class="category-header">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <h3>One Day School Tours</h3>
+        </div>
+        <ul class="tour-list">
+          @for (tour of oneDayTours; track tour; let i = $index) {
+            <li>
+              <span class="tour-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <p class="tour-desc">{{ tour }}</p>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Two Day Tours -->
+      <div class="tour-category glass-card">
+        <div class="category-header">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <h3>Two Days School Tours</h3>
+        </div>
+        <ul class="tour-list">
+          @for (tour of twoDayTours; track tour; let i = $index) {
+            <li>
+              <span class="tour-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <p class="tour-desc">{{ tour }}</p>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

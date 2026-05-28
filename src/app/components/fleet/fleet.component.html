@@ -1,0 +1,48 @@
+<!-- Replace with client's actual bus photos -->
+<section class="fleet section-padding" id="fleet">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Our Fleet — Travel In Comfort" subtitle="Professional drivers. Safe journeys. Group travel, perfected."></app-animated-heading>
+
+    <!-- Centered Single Flagship Card Layout -->
+    <div class="fleet-centered-container" scrollReveal>
+      <div class="fleet-card-large" tiltCard>
+        <div class="fleet-image-section">
+          <img [src]="flagshipVehicle.image" [alt]="flagshipVehicle.type" loading="lazy" (error)="onImageError($event)">
+          <div class="fleet-image-overlay"></div>
+          <div class="fleet-badge-large">{{ flagshipVehicle.capacity }}</div>
+        </div>
+        <div class="fleet-content-section">
+          <span class="gold-subtitle">OUR FLAGSHIP VEHICLE</span>
+          <h3>{{ flagshipVehicle.type }}</h3>
+          
+          <ul class="fleet-amenities">
+            @for (feature of flagshipVehicle.features; track feature) {
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="check-icon"><polyline points="20 6 9 17 4 12"/></svg>
+                {{ feature }}
+              </li>
+            }
+          </ul>
+          
+          <p class="fleet-best-suited">
+            <span class="label">Best For:</span> {{ flagshipVehicle.bestFor }}
+          </p>
+          
+          <button class="btn btn-gold btn-large" (click)="bookFleet()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Book Premium Coach
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fleet Inquiries CTA -->
+    <div class="fleet-cta" scrollReveal [revealDelay]="200">
+      <p>Need custom transportation or seating configurations? We offer tailored travel packages.</p>
+      <button class="btn btn-primary" (click)="bookFleet()">
+        WhatsApp for Custom Rates
+      </button>
+    </div>
+  </div>
+</section>

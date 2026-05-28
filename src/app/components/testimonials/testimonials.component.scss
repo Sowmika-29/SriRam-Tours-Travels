@@ -1,0 +1,141 @@
+@use '../../../styles/variables' as *;
+
+.testimonials {
+  background: $cream-white;
+  overflow: hidden;
+
+  .section-heading h2,
+  .section-heading p {
+    color: $text-dark;
+  }
+}
+
+// Typewriter heading
+.section-heading h2 {
+  min-height: 70px;
+
+  @media (max-width: $bp-mobile) {
+    min-height: 45px;
+  }
+
+  &.shimmer {
+    background: linear-gradient(
+      90deg,
+      $cream 0%,
+      $gold-light 25%,
+      $gold 50%,
+      $gold-light 75%,
+      $cream 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out;
+  }
+}
+
+::ng-deep .typewriter-cursor {
+  color: $gold;
+  font-weight: 300;
+  animation: cursorBlink 0.8s infinite;
+}
+
+.section-subtitle {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+
+  &.visible { opacity: 1; }
+}
+
+// Scrapbook grid
+.testimonial-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding: 20px;
+
+  @media (max-width: $bp-mobile) {
+    gap: 20px;
+  }
+}
+
+.testimonial-card {
+  width: 320px;
+  transform: rotate(var(--rotation, 0deg));
+  animation: floatSlow 4s ease-in-out infinite;
+
+  @media (max-width: $bp-mobile) {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .card-inner {
+    background: linear-gradient(135deg, rgba(252, 251, 248, 0.95) 0%, rgba(252, 251, 248, 0.7) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: $radius-card;
+    padding: 32px;
+    position: relative;
+    transition: all 0.4s;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+
+    // Paper texture hint
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 28px,
+        rgba(0, 0, 0, 0.03) 28px,
+        rgba(0, 0, 0, 0.03) 29px
+      );
+      pointer-events: none;
+    }
+  }
+
+  &:hover .card-inner {
+    transform: translateY(-4px) rotate(calc(var(--rotation, 0deg) * -1));
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba($gold, 0.3);
+  }
+
+  .stars {
+    margin-bottom: 16px;
+
+    .star {
+      font-size: 16px;
+      margin-right: 2px;
+    }
+  }
+
+  .quote {
+    font-family: $font-handwritten;
+    font-size: 20px;
+    color: $text-dark;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .author-name {
+      font-weight: 600;
+      color: $text-dark;
+      font-size: 15px;
+    }
+
+    .author-city {
+      color: $gold;
+      font-size: 13px;
+    }
+  }
+}

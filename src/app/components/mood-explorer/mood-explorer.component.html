@@ -1,0 +1,24 @@
+<section class="mood-explorer section-padding" id="mood-explorer">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Choose Your Travel Mood" subtitle="Find the perfect vibe for your next getaway"></app-animated-heading>
+
+    <!-- Mood Grid -->
+    <div class="mood-grid">
+      @for (mood of moods; track mood.name; let i = $index) {
+        <div class="mood-tile"
+             [class]="'mood-tile tile-' + i"
+             scrollReveal [revealDelay]="i * 100"
+             (click)="selectMood(mood.name)">
+          <img [src]="mood.image" [alt]="mood.name" loading="lazy">
+          <div class="mood-overlay"></div>
+          <div class="mood-content">
+            <span class="mood-icon" [innerHTML]="mood.icon"></span>
+            <h3>{{ mood.name }}</h3>
+          </div>
+          <div class="mood-glow"></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

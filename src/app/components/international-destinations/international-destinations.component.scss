@@ -1,0 +1,125 @@
+@use '../../../styles/variables' as *;
+
+.international {
+  background: $beige;
+}
+
+// Train Track heading
+.train-heading-wrapper {
+  position: relative;
+
+
+  h2 {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s ease 0.8s;
+
+    &.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+// Magazine grid
+.intl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 24px;
+
+  .mag-0 {
+    grid-column: span 2;
+    min-height: 420px;
+
+    @media (max-width: $bp-tablet) {
+      grid-column: span 1;
+      min-height: 300px;
+    }
+  }
+
+  .mag-3 {
+    grid-column: span 2;
+    min-height: 380px;
+
+    @media (max-width: $bp-tablet) {
+      grid-column: span 1;
+      min-height: 300px;
+    }
+  }
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.intl-card {
+  position: relative;
+  border-radius: $radius-card;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+
+  .intl-image {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .intl-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.85) 100%);
+    }
+  }
+
+  .intl-info {
+    position: relative;
+    z-index: 2;
+    padding: 32px;
+
+    .intl-price {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba($gold, 0.2);
+      border-radius: $radius-pill;
+      color: $gold;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 30px;
+      margin-bottom: 8px;
+      color: $ivory;
+
+      @media (max-width: $bp-mobile) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      color: rgba($beige, 0.7);
+      font-style: italic;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+  }
+
+  &:hover .intl-image img {
+    transform: scale(1.05);
+  }
+}

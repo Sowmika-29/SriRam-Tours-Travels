@@ -1,0 +1,258 @@
+@use '../../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  padding: 16px 0;
+  transition: all 0.4s ease;
+
+  &.scrolled {
+    background: rgba(31, 41, 55, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.navbar-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+
+  .logo-icon {
+    display: flex;
+    transition: transform 0.3s;
+
+    img {
+      border-radius: 50%;
+      object-fit: contain;
+    }
+  }
+
+  &:hover .logo-icon {
+    transform: scale(1.08);
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-main {
+    font-family: $font-heading;
+    font-size: 24px;
+    font-weight: 700;
+    color: $cream;
+    letter-spacing: 1px;
+  }
+
+  .logo-sub {
+    font-family: $font-body;
+    font-size: 11px;
+    color: $gold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @media (max-width: $bp-desktop) {
+    display: none;
+  }
+
+  li {
+    position: relative;
+  }
+
+  .nav-link {
+    padding: 8px 16px;
+    color: rgba($cream, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: $gold;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: $cream;
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.btn-whatsapp-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, $gold, $gold-light);
+  color: $emerald-dark;
+  border-radius: $radius-pill;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  animation: pulseGlow 2s infinite;
+
+  .wa-icon {
+    font-size: 16px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-gold;
+  }
+
+  @media (max-width: $bp-desktop) {
+    display: none;
+  }
+}
+
+// Hamburger
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  background: transparent;
+  cursor: pointer;
+
+  @media (max-width: $bp-desktop) {
+    display: flex;
+  }
+
+  span {
+    width: 28px;
+    height: 2px;
+    background: $cream;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  &.active {
+    span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  }
+}
+
+// Mobile Overlay
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: $z-overlay;
+  animation: fadeIn 0.3s ease;
+}
+
+.mobile-menu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 320px;
+  max-width: 85vw;
+  background: linear-gradient(180deg, $emerald-dark, #000000);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  animation: slideInFromRight 0.4s ease;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+
+  .logo-main {
+    font-family: $font-heading;
+    font-size: 28px;
+    color: $cream;
+  }
+
+  .close-btn {
+    background: rgba($cream, 0.1);
+    color: $cream;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+
+  li {
+    animation: staggerIn 0.4s ease forwards;
+    opacity: 0;
+
+    a {
+      display: block;
+      padding: 14px 20px;
+      color: $beige;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background: rgba($emerald, 0.15);
+        color: $gold;
+        padding-left: 28px;
+      }
+    }
+  }
+}
+
+.mobile-wa {
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
+}

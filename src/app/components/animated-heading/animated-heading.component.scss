@@ -1,0 +1,174 @@
+@use '../../../styles/variables' as *;
+
+.animated-heading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.animated-subtitle {
+  font-family: $font-body;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  
+  .theme-light & {
+    color: $gold;
+  }
+  .theme-dark & {
+    color: $gold-light;
+  }
+}
+
+.anim1-wrap {
+  position: relative;
+  height: 80px;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  overflow: visible;
+}
+
+/* SVG bus */
+.bus-svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-160px);
+  width: 56px;
+  height: 32px;
+  z-index: 10;
+  pointer-events: none;
+  
+  .bus-body {
+    fill: $primary-green;
+    stroke: $gold;
+    stroke-width: 1.5px;
+    
+    .theme-dark & {
+      fill: $cream;
+      stroke: $gold-light;
+    }
+  }
+
+  .bus-glass {
+    fill: $cream;
+    opacity: 0.8;
+  }
+
+  .bus-window {
+    fill: $cream;
+    opacity: 0.6;
+    
+    .theme-dark & {
+      fill: $primary-green;
+    }
+  }
+
+  .bus-wheel {
+    fill: $text-dark;
+    stroke: $gold;
+    stroke-width: 1px;
+    
+    .theme-dark & {
+      fill: $emerald-dark;
+      stroke: $gold-light;
+    }
+  }
+
+  .bus-stripe {
+    stroke: $gold;
+    stroke-width: 1.5px;
+    
+    .theme-dark & {
+      stroke: $gold-light;
+    }
+  }
+}
+
+.bus-svg.drive {
+  animation: busRoll 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.bus-svg.park {
+  animation: busPark 0.5s ease forwards;
+}
+
+@keyframes busRoll {
+  from { transform: translateY(-50%) translateX(-160px); }
+  to   { transform: translateY(-50%) translateX(calc(var(--bus-end, 660px))); }
+}
+
+@keyframes busPark {
+  from { opacity: 1; transform: translateY(-50%) translateX(var(--bus-end, 660px)); }
+  to   { opacity: 0; transform: translateY(-50%) translateX(calc(var(--bus-end, 660px) + 30px)); }
+}
+
+/* Heading letters */
+.anim1-heading {
+  font-family: $font-heading;
+  font-size: 48px;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 1.2;
+  
+  .theme-light & {
+    color: $primary-green;
+  }
+  
+  .theme-dark & {
+    color: $ivory;
+  }
+
+  @media (max-width: $bp-tablet) {
+    font-size: 36px;
+  }
+  @media (max-width: $bp-mobile) {
+    font-size: 28px;
+  }
+}
+
+.anim1-heading .letter {
+  opacity: 0;
+  transform: translateY(16px);
+  display: inline-block;
+}
+
+.anim1-heading .letter.visible {
+  animation: letterUp 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.anim1-heading .space {
+  display: inline-block;
+  width: 0.25em;
+}
+
+@keyframes letterUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Gold underline */
+.gold-underline {
+  height: 2px;
+  background: linear-gradient(90deg, $gold, $gold-light, $gold);
+  width: 0;
+  border-radius: 2px;
+  margin-top: 8px;
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  align-self: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.gold-underline.show {
+  width: 100%;
+}

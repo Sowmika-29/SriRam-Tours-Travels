@@ -1,0 +1,48 @@
+<div class="animated-heading-container" #containerEl [class.theme-dark]="theme === 'dark'" [class.theme-light]="theme === 'light'">
+  @if (subtitle) {
+    <span class="animated-subtitle">{{ subtitle }}</span>
+  }
+  
+  <div class="anim1-wrap">
+    <!-- Inline SVG Bus -->
+    <svg class="bus-svg" 
+         [class.drive]="status === 'drive'" 
+         [class.park]="status === 'park'" 
+         [style.--bus-end]="busEndPx + 'px'" 
+         viewBox="0 0 100 50">
+      <!-- Bus body -->
+      <rect x="2" y="10" width="88" height="28" rx="6" class="bus-body" />
+      <!-- Windshield -->
+      <path d="M78 12 h10 a2 2 0 0 1 2 2 v10 h-12 z" class="bus-glass" />
+      <!-- Windows -->
+      <rect x="12" y="14" width="10" height="8" rx="1" class="bus-window" />
+      <rect x="25" y="14" width="10" height="8" rx="1" class="bus-window" />
+      <rect x="38" y="14" width="10" height="8" rx="1" class="bus-window" />
+      <rect x="51" y="14" width="10" height="8" rx="1" class="bus-window" />
+      <rect x="64" y="14" width="10" height="8" rx="1" class="bus-window" />
+      <!-- Wheels -->
+      <circle cx="24" cy="38" r="6" class="bus-wheel" />
+      <circle cx="68" cy="38" r="6" class="bus-wheel" />
+      <!-- Decorative Stripe -->
+      <line x1="2" y1="28" x2="88" y2="28" class="bus-stripe" />
+    </svg>
+
+    <!-- Heading letters -->
+    <h2 class="anim1-heading" #headingEl>
+      @for (letter of letters; track $index; let i = $index) {
+        @if (letter === ' ') {
+          <span class="space">&nbsp;</span>
+        } @else {
+          <span class="letter" 
+                [class.visible]="revealed" 
+                [style.animation-delay]="(i * (1300 / letters.length)) + 'ms'">
+            {{ letter }}
+          </span>
+        }
+      }
+    </h2>
+  </div>
+
+  <!-- Gold Underline -->
+  <div class="gold-underline" [class.show]="revealed"></div>
+</div>

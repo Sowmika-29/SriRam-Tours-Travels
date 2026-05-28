@@ -1,0 +1,32 @@
+<section class="why-choose section-padding" id="why-choose">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Why Thousands Trust Sri Ram"></app-animated-heading>
+
+    <!-- Reason Cards -->
+    <div class="reasons-grid">
+      @for (reason of reasons; track reason.title; let i = $index) {
+        <div class="reason-card glass-card"
+             scrollReveal [revealDelay]="i * 100">
+          <span class="reason-icon" [innerHTML]="reason.icon"></span>
+          <h3>{{ reason.title }}</h3>
+          <p>{{ reason.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section" #statsEl>
+  <div class="container">
+    <div class="stats-grid" [class.revealed]="statsRevealed">
+      @for (stat of stats; track stat.label; let i = $index) {
+        <div class="stat-item" [style.animation-delay]="(i * 200) + 'ms'">
+          <span class="stat-value" #counterEl>0</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

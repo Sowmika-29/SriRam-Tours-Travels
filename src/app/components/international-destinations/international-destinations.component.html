@@ -1,0 +1,26 @@
+<section class="international section-padding" id="international">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="The World Is Waiting" subtitle="Luxury international tour packages crafted for you"></app-animated-heading>
+
+    <!-- Magazine Layout -->
+    <div class="intl-grid">
+      @for (dest of destinations; track dest.name; let i = $index) {
+        <div class="intl-card" [class]="'intl-card mag-' + i"
+             scrollReveal [revealDelay]="i * 80">
+          <div class="intl-image">
+            <img [src]="dest.image" [alt]="dest.name" loading="lazy">
+            <div class="intl-overlay"></div>
+          </div>
+          <div class="intl-info">
+            <h3>{{ dest.name }}</h3>
+            <p>{{ dest.tagline }}</p>
+            <button class="btn btn-gold btn-small" (click)="bookDestination(dest.name)">
+              Enquire Now
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

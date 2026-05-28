@@ -1,0 +1,37 @@
+<USER_REQUEST>
+SRI RAM Tour & Travels — Ultimate Angular Website Prompt
+
+🏢 BUSINESS DETAILS
+Company Name   : SRI RAM Tour & Travels
+Director       : M. Ganesan
+Phone 1        : 9486547938
+Phone 2        : 9751212846
+Email          : sriramtours27@gmail.com
+Address        : 9th Cross, Thiruvalluvar Nagar, Kothur Road,
+                 Velusamypuram, L.N.S(Po), Karur – 639008
+WhatsApp URL   : https://wa.me/919486547938
+
+🎨 DESIGN SYSTEM
+scss// COLORS
+$primary-green     : #1a5c38;
+$emerald           : #2ecc71;
+$emerald-dark      : #0b1f14;
+$gold              : #f5a623;
+$gold-light        : #ffd700;
+$beige             : #f8f5ee;
+$cream             : #fffdf7;
+$dark-overlay      : rgba(11, 31, 20, 0.72);
+
+// FONTS
+// Headings  → Cormorant Garamond (Google Fonts)
+// Subhead   → Bebas Neue (Google Fonts)
+// Body      → Poppins (Google Fonts)
+
+// SIZES
+// H1: 88px | H2: 64px | H3: 42px | Body: 18px
+
+// RADIUS
+// Cards: 20px | Buttons: 50px (pill) | Sections: 0px
+
+✨ GLOBAL HEADING ANIMATION SYSTEM
+<truncated 15909 bytes>

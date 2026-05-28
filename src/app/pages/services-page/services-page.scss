@@ -1,0 +1,102 @@
+@use '../../../styles/variables' as *;
+
+.school-tours {
+  background: $ivory;
+}
+
+.tours-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tour-category {
+  padding: 40px;
+  background: $ivory;
+  border: 1px solid rgba($primary-green, 0.15);
+  border-radius: $radius-card;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgba($gold, 0.4);
+    transform: translateY(-5px);
+  }
+  
+  @media (max-width: $bp-mobile) {
+    padding: 24px;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed rgba($primary-green, 0.2);
+
+    svg {
+      color: $gold;
+    }
+
+    h3 {
+      font-size: 28px;
+      color: $text-dark;
+      font-family: $font-heading;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.tour-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba($primary-green, 0.05);
+    transition: background 0.3s;
+
+    &:hover {
+      background: rgba($gold, 0.08);
+      
+      .tour-number {
+        color: $gold-light;
+        border-color: $gold-light;
+      }
+    }
+  }
+
+  .tour-number {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba($gold, 0.5);
+    border-radius: 50%;
+    color: $gold;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: $font-subhead;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .tour-desc {
+    font-size: 14px;
+    color: $text-muted;
+    line-height: 1.6;
+    margin: 0;
+    text-transform: capitalize;
+  }
+}

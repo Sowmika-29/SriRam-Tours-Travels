@@ -1,0 +1,87 @@
+@use '../../../styles/variables' as *;
+
+.services-section {
+}
+
+.wave-heading {
+  clip-path: inset(-20px 100% -20px -20px);
+  filter: blur(12px);
+  transition: clip-path 1.2s ease, filter 1.2s ease;
+
+  &.revealed {
+    clip-path: inset(-20px -20px -20px -20px);
+    filter: blur(0);
+  }
+}
+
+
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-card {
+  padding: 36px 28px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(252, 251, 248, 0.95) 0%, rgba(252, 251, 248, 0.7) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba($primary-green, 0.08);
+  border-radius: $radius-card;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease,
+              background 0.4s ease;
+
+  .service-icon {
+    display: inline-flex;
+    margin-bottom: 24px;
+    color: $primary-green;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
+
+    ::ng-deep svg {
+      width: 44px;
+      height: 44px;
+      stroke-width: 1.5;
+    }
+  }
+
+  h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: $text-dark;
+    font-family: $font-heading;
+    font-weight: 600;
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: rgba($gold, 0.5);
+    background: linear-gradient(135deg, #FCFBF8 0%, rgba(#F5EBDD, 0.5) 100%);
+    box-shadow: 0 20px 40px rgba(15, 118, 110, 0.08), 
+                0 8px 24px rgba(198, 169, 105, 0.15);
+
+    .service-icon {
+      transform: scale(1.18) rotate(8deg);
+      color: $gold;
+    }
+  }
+}

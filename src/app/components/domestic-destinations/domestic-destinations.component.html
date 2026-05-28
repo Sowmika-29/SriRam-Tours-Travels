@@ -1,0 +1,26 @@
+<section class="domestic section-padding" id="domestic">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Explore India With Us" subtitle="Discover the incredible beauty of India"></app-animated-heading>
+
+    <!-- Destination Cards -->
+    <div class="dest-grid">
+      @for (dest of destinations; track dest.name; let i = $index) {
+        <div class="dest-card" [class]="'dest-card pos-' + i"
+             scrollReveal [revealDelay]="i * 100">
+          <div class="dest-image">
+            <img [src]="dest.image" [alt]="dest.name" loading="lazy">
+            <div class="dest-overlay"></div>
+          </div>
+          <div class="dest-info">
+            <h3>{{ dest.name }}</h3>
+            <p class="dest-tagline">{{ dest.tagline }}</p>
+            <button class="btn btn-gold btn-small" (click)="bookDestination(dest.name)">
+              Enquire Now
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<section class="testimonials section-padding" id="testimonials">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Voices From The Road" subtitle="Real stories from real travelers"></app-animated-heading>
+
+    <!-- Scrapbook Grid -->
+    <div class="testimonial-grid">
+      @for (t of testimonials; track t.name; let i = $index) {
+        <div class="testimonial-card"
+             [style.--rotation]="t.rotation + 'deg'"
+             [style.animation-delay]="(i * 0.3) + 's'">
+          <div class="card-inner">
+            <div class="stars">
+              @for (s of getStars(t.rating); track $index) {
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623" stroke="#f5a623" stroke-width="2" class="star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              }
+            </div>
+            <p class="quote">{{ t.text }}</p>
+            <div class="author">
+              <span class="author-name">{{ t.name }}</span>
+              <span class="author-city">{{ t.city }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

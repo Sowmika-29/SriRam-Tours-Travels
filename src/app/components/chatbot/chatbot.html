@@ -1,0 +1,47 @@
+<!-- Floating Button -->
+<div class="chat-fab" (click)="toggleChat()" [class.hidden]="isOpen()">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chat-icon">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</div>
+
+<!-- Chat Window -->
+<div class="chat-window glass-card" [class.open]="isOpen()">
+  <div class="chat-header">
+    <div class="header-info">
+      <div class="bot-avatar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7v1a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
+          <path d="M9 13v-2"></path>
+          <path d="M15 13v-2"></path>
+        </svg>
+      </div>
+      <div>
+        <h4>Sri Ram Assistant</h4>
+        <span class="status">Online</span>
+      </div>
+    </div>
+    <button class="close-btn" (click)="toggleChat()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="chat-body">
+    @for (msg of messages(); track $index) {
+      <div class="chat-bubble" [class.bot]="msg.isBot" [class.user]="!msg.isBot">
+        {{ msg.text }}
+      </div>
+    }
+
+    <div class="chat-options">
+      @for (opt of options; track opt) {
+        <button class="chat-option-btn" (click)="handleOptionClick(opt)">
+          {{ opt }}
+        </button>
+      }
+    </div>
+  </div>
+</div>

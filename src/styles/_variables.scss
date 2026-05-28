@@ -1,0 +1,77 @@
+// ========================================
+// SRI RAM Tour & Travels — Design Tokens
+// Matched to Logo: Forest Green Globe + Bus + Airplane
+// ========================================
+
+// PRIMARY COLORS (Luxury Editorial)
+$primary-green:    #0F766E;   // Primary Emerald
+$emerald:          #0F766E;   // Alias for backwards compatibility
+$sage:             #7A9E92;   // Soft Sage
+$emerald-dark:     #0b1614;   // Dark Emerald (for footer)
+$gold:             #C6A969;   // Muted Gold Accent
+$gold-light:       #e0c382;   // Lighter Gold
+$beige:            #F5EBDD;   // Beige Sand
+$ivory:            #FCFBF8;   // Warm Ivory
+$cream:            #FCFBF8;   // Map cream to ivory
+$dark-overlay:     rgba(15, 118, 110, 0.2); // Soft emerald overlay
+
+// EXTENDED PALETTE
+$green-mid:        #115E59;   // Hover Emerald
+$cream-white:      #FCFBF8;   // Warm Ivory
+$gold-hover:       #a88e55;   // Darker gold for hover states
+$text-dark:        #111C19;   // Ultra-deep Emerald-Charcoal for premium headings
+$text-muted:       #445650;   // Sophisticated Sage-Charcoal for readable paragraphs
+$slate:            #445650;   // Alias for backwards compatibility
+$glass-bg:         rgba(252, 251, 248, 0.4); // Light glass
+$glass-border:     rgba(252, 251, 248, 0.6);
+
+// FONT FAMILIES
+$font-heading:     'Cormorant Garamond', serif;
+$font-subhead:     'Bebas Neue', sans-serif;
+$font-body:        'Poppins', sans-serif;
+$font-handwritten: 'Caveat', cursive;
+
+// FONT SIZES
+$h1-size: 88px;
+$h2-size: 64px;
+$h3-size: 42px;
+$body-size: 18px;
+$small-size: 14px;
+
+// RESPONSIVE FONT SIZES
+$h1-mobile: 42px;
+$h1-tablet: 60px;
+$h2-mobile: 32px;
+$h2-tablet: 48px;
+$h3-mobile: 28px;
+$h3-tablet: 36px;
+
+// BORDER RADIUS
+$radius-card:   24px;
+$radius-pill:   50px;
+$radius-section: 0px;
+
+// SHADOWS (adjusted for green theme)
+$shadow-card:    0 8px 32px rgba(0, 0, 0, 0.15);
+$shadow-hover:   0 16px 48px rgba(201, 168, 76, 0.2);
+$shadow-gold:    0 4px 24px rgba(201, 168, 76, 0.25);
+$shadow-dark:    0 12px 40px rgba(0, 0, 0, 0.3);
+
+// TRANSITIONS
+$transition-base:  all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow:  all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+$transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// BREAKPOINTS
+$bp-mobile:  480px;
+$bp-tablet:  768px;
+$bp-desktop: 1024px;
+$bp-wide:    1440px;
+
+// Z-INDEX
+$z-particles:  1;
+$z-content:    10;
+$z-navbar:     100;
+$z-overlay:    200;
+$z-whatsapp:   500;
+$z-modal:      1000;

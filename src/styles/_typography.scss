@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+// ========================================
+// Typography System
+// ========================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 700;
+  line-height: 1.1;
+  color: $text-dark;
+}
+
+h1 {
+  font-size: $h1-size;
+  letter-spacing: -1px;
+
+  @media (max-width: $bp-tablet) { font-size: $h1-tablet; }
+  @media (max-width: $bp-mobile) { font-size: $h1-mobile; }
+}
+
+h2 {
+  font-size: $h2-size;
+  letter-spacing: -0.5px;
+
+  @media (max-width: $bp-tablet) { font-size: $h2-tablet; }
+  @media (max-width: $bp-mobile) { font-size: $h2-mobile; }
+}
+
+h3 {
+  font-size: $h3-size;
+
+  @media (max-width: $bp-tablet) { font-size: $h3-tablet; }
+  @media (max-width: $bp-mobile) { font-size: $h3-mobile; }
+}
+
+body {
+  font-family: $font-body;
+  font-size: $body-size;
+  line-height: 1.7;
+  color: $text-muted;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.subhead {
+  font-family: $font-subhead;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.text-gold { color: $gold; }
+.text-cream { color: $cream; }
+.text-emerald { color: $emerald; }
+.text-beige { color: $beige; }
+
+.section-subtitle {
+  font-family: $font-body;
+  font-size: 20px;
+  color: $text-muted;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 16px;
+  }
+}

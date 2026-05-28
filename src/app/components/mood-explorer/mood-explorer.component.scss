@@ -1,0 +1,110 @@
+@use '../../../styles/variables' as *;
+
+.mood-explorer {
+  background: $ivory;
+}
+
+// Mountain Rise heading
+.mountain-heading {
+  .mountain-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    filter: blur(4px);
+
+    &.revealed {
+      animation: mountainRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+
+  .heading-space {
+    display: inline-block;
+    width: 0.3em;
+  }
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 320px 280px;
+  gap: 20px;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 260px);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 220px);
+  }
+}
+
+.mood-tile {
+  position: relative;
+  border-radius: $radius-card;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.tile-0 { grid-row: span 1; }
+  &.tile-3 { grid-column: span 1; }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .mood-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(11, 31, 20, 0.8) 100%);
+    transition: background 0.3s;
+  }
+
+  .mood-content {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    z-index: 2;
+
+    .mood-icon {
+      margin-bottom: 12px;
+      display: inline-flex;
+      color: $gold;
+
+      ::ng-deep svg {
+        width: 32px;
+        height: 32px;
+        opacity: 0.9;
+      }
+    }
+
+    h3 {
+      font-size: 26px;
+      font-family: $font-heading;
+      color: $ivory;
+
+      @media (max-width: $bp-mobile) {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .mood-glow {
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: $radius-card;
+    transition: border-color 0.3s;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  &:hover {
+    img { transform: scale(1.06); }
+    .mood-glow { border-color: rgba($gold, 0.5); }
+    .mood-overlay { background: linear-gradient(180deg, transparent 20%, rgba(11, 31, 20, 0.9) 100%); }
+  }
+}

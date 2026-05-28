@@ -1,0 +1,18 @@
+<section class="services-section section-padding" id="services">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Everything You Need, One Place"></app-animated-heading>
+
+    <!-- Services Grid -->
+    <div class="services-grid">
+      @for (service of services; track service.title; let i = $index) {
+        <div class="service-card glass-card"
+             scrollReveal [revealDelay]="i * 80">
+          <span class="service-icon" [innerHTML]="service.icon"></span>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

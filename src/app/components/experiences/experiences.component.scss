@@ -1,0 +1,164 @@
+@use '../../../styles/variables' as *;
+
+.experiences {
+  background: $cream-white;
+  
+  .section-heading h2,
+  .section-heading p {
+    color: $text-dark;
+  }
+}
+
+// Wave reveal heading
+.wave-heading {
+  clip-path: inset(-20px 100% -20px -20px);
+  filter: blur(12px);
+  transition: clip-path 1.2s ease, filter 1.2s ease;
+
+  &.revealed {
+    clip-path: inset(-20px -20px -20px -20px);
+    filter: blur(0);
+  }
+}
+
+
+// Asymmetric grid
+.exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+
+  @media (max-width: $bp-desktop) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exp-card {
+  position: relative;
+  border-radius: $radius-card;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 280px;
+
+  &.card-0 {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    min-height: 580px;
+
+    @media (max-width: $bp-desktop) {
+      grid-row: auto;
+      min-height: 350px;
+    }
+  }
+
+  &.card-1 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  &.card-2 {
+    grid-column: 3;
+    grid-row: 1;
+
+    @media (max-width: $bp-desktop) {
+      grid-column: 1;
+    }
+  }
+
+  &.card-3 {
+    grid-column: 2;
+    grid-row: 2;
+
+    @media (max-width: $bp-desktop) {
+      grid-column: 2;
+    }
+  }
+
+  &.card-4 {
+    grid-column: 3;
+    grid-row: 2;
+
+    @media (max-width: $bp-desktop) {
+      grid-column: 1;
+    }
+  }
+
+  &.card-5 {
+    @media (max-width: $bp-desktop) {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: $bp-mobile) {
+    &.card-0, &.card-1, &.card-2, &.card-3, &.card-4, &.card-5 {
+      grid-column: 1;
+      grid-row: auto;
+      min-height: 260px;
+    }
+  }
+
+  .exp-image {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+  }
+
+  .exp-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.85) 100%);
+  }
+
+  .exp-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    z-index: 2;
+
+    .exp-icon {
+      margin-bottom: 12px;
+      display: inline-flex;
+      color: $gold;
+
+      ::ng-deep svg {
+        width: 32px;
+        height: 32px;
+        opacity: 0.9;
+      }
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 4px;
+      color: $ivory;
+
+      @media (max-width: $bp-mobile) {
+        font-size: 20px;
+      }
+    }
+
+    p {
+      color: rgba($beige, 0.7);
+      font-size: 15px;
+    }
+  }
+
+  &:hover {
+    .exp-image img {
+      transform: scale(1.04);
+    }
+  }
+}

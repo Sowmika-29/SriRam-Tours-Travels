@@ -1,0 +1,24 @@
+<section class="experiences section-padding" id="experiences">
+  <div class="container">
+    <!-- Animated Heading with Bus -->
+    <app-animated-heading text="Experiences We Create"></app-animated-heading>
+
+    <!-- Asymmetric Grid -->
+    <div class="exp-grid">
+      @for (exp of experiences; track exp.title; let i = $index) {
+        <div class="exp-card" [class]="'exp-card card-' + i"
+             scrollReveal [revealDelay]="i * 120">
+          <div class="exp-image">
+            <img [src]="exp.image" [alt]="exp.title" loading="lazy">
+            <div class="exp-overlay"></div>
+          </div>
+          <div class="exp-content">
+            <span class="exp-icon" [innerHTML]="exp.icon"></span>
+            <h3>{{ exp.title }}</h3>
+            <p>{{ exp.copy }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
