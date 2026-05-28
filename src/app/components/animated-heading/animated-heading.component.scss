@@ -114,11 +114,14 @@
   font-size: 48px;
   letter-spacing: 0.04em;
   font-weight: 700;
-  display: flex;
-  gap: 0;
-  white-space: nowrap;
+  display: block;
   margin: 0;
   line-height: 1.2;
+
+  .word-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+  }
   
   .theme-light & {
     color: $primary-green;

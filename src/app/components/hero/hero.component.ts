@@ -12,13 +12,22 @@ export class HeroComponent implements OnInit, AfterViewInit {
   @ViewChild('particlesCanvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
 
   tagline = 'Journeys Beyond Destinations.';
-  taglineLetters: string[] = [];
+  taglineWords: { letters: { char: string; globalIndex: number; }[] }[] = [];
   busAnimationStarted = true;
 
   constructor(private whatsapp: WhatsappService) {}
 
   ngOnInit(): void {
-    this.taglineLetters = this.tagline.split('');
+    const rawWords = this.tagline.split(' ');
+    let charCounter = 0;
+    this.taglineWords = rawWords.map(word => {
+      const letters = word.split('').map(char => {
+        const globalIndex = charCounter++;
+        return { char, globalIndex };
+      });
+      charCounter++;
+      return { letters };
+    });
   }
 
   ngAfterViewInit(): void {

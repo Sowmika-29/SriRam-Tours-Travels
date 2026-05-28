@@ -29,15 +29,18 @@
 
     <!-- Heading letters -->
     <h2 class="anim1-heading" #headingEl>
-      @for (letter of letters; track $index; let i = $index) {
-        @if (letter === ' ') {
+      @for (word of words; track $index; let wordIdx = $index) {
+        <span class="word-wrapper">
+          @for (letter of word.letters; track $index) {
+            <span class="letter" 
+                  [class.visible]="revealed" 
+                  [style.animation-delay]="(letter.globalIndex * (1300 / totalLettersCount)) + 'ms'">
+              {{ letter.char }}
+            </span>
+          }
+        </span>
+        @if (wordIdx < words.length - 1) {
           <span class="space">&nbsp;</span>
-        } @else {
-          <span class="letter" 
-                [class.visible]="revealed" 
-                [style.animation-delay]="(i * (1300 / letters.length)) + 'ms'">
-            {{ letter }}
-          </span>
         }
       }
     </h2>

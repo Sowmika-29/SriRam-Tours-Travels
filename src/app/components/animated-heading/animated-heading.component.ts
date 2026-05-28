@@ -2,6 +2,10 @@ import { Component, Input, AfterViewInit, ElementRef, ViewChild, HostListener, O
 import { CommonModule } from '@angular/common';
 import { AnimationService } from '../../services/animation.service';
 
+interface WordItem {
+  letters: { char: string; globalIndex: number; }[];
+}
+
 @Component({
   selector: 'app-animated-heading',
   standalone: true,
@@ -17,7 +21,8 @@ export class AnimatedHeadingComponent implements OnInit, AfterViewInit {
   @ViewChild('headingEl') headingEl!: ElementRef;
   @ViewChild('containerEl') containerEl!: ElementRef;
 
-  letters: string[] = [];
+  words: WordItem[] = [];
+  totalLettersCount = 0;
   status: 'idle' | 'drive' | 'park' = 'idle';
   busEndPx: number = 660;
   revealed = false;
@@ -25,7 +30,19 @@ export class AnimatedHeadingComponent implements OnInit, AfterViewInit {
   constructor(private animationService: AnimationService) {}
 
   ngOnInit(): void {
-    this.letters = this.text.split('');
+    const rawWords = this.text.split(' ');
+    let charCounter = 0;
+    
+    this.words = rawWords.map(word => {
+      const letters = word.split('').map(char => {
+        const globalIndex = charCounter++;
+        return { char, globalIndex };
+      });
+      charCounter++; // Account for space
+      return { letters };
+    });
+    
+    this.totalLettersCount = charCounter;
   }
 
   ngAfterViewInit(): void {

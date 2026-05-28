@@ -15,15 +15,18 @@
     <!-- Text Heading -->
     <div class="bus-heading-wrapper" #busHeading>
       <h1>
-        @for (letter of taglineLetters; track $index; let i = $index) {
-          @if (letter === ' ') {
+        @for (word of taglineWords; track $index; let wordIdx = $index) {
+          <span class="word-wrapper">
+            @for (letter of word.letters; track $index) {
+              <span class="heading-letter"
+                    [class.animate]="busAnimationStarted"
+                    [style.animation-delay]="(letter.globalIndex * 60 + 800) + 'ms'">
+                {{ letter.char }}
+              </span>
+            }
+          </span>
+          @if (wordIdx < taglineWords.length - 1) {
             <span class="heading-space">&nbsp;</span>
-          } @else {
-            <span class="heading-letter"
-                  [class.animate]="busAnimationStarted"
-                  [style.animation-delay]="(i * 80 + 800) + 'ms'">
-              {{ letter }}
-            </span>
           }
         }
       </h1>

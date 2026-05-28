@@ -90,6 +90,11 @@
 
     @media (max-width: $bp-tablet) { font-size: $h1-tablet; }
     @media (max-width: $bp-mobile) { font-size: $h1-mobile; }
+
+    .word-wrapper {
+      display: inline-block;
+      white-space: nowrap;
+    }
   }
 
   .heading-letter {
