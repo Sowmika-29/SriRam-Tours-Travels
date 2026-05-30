@@ -75,7 +75,7 @@
   &:hover {
     transform: translateY(-8px);
     border-color: rgba($gold, 0.5);
-    background: linear-gradient(135deg, #FCFBF8 0%, rgba(#F5EBDD, 0.5) 100%);
+    background: linear-gradient(135deg, $cream 0%, rgba($beige, 0.5) 100%);
     box-shadow: 0 20px 40px rgba(15, 118, 110, 0.08), 
                 0 8px 24px rgba(198, 169, 105, 0.15);
 

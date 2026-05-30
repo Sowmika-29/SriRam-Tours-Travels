@@ -8,27 +8,11 @@ import { WhatsappService } from '../../services/whatsapp.service';
   styleUrl: './hero.component.scss'
 })
 export class HeroComponent implements OnInit, AfterViewInit {
-  @ViewChild('busHeading', { static: false }) busHeadingRef!: ElementRef;
   @ViewChild('particlesCanvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
-
-  tagline = 'Journeys Beyond Destinations.';
-  taglineWords: { letters: { char: string; globalIndex: number; }[] }[] = [];
-  busAnimationStarted = true;
 
   constructor(private whatsapp: WhatsappService) {}
 
-  ngOnInit(): void {
-    const rawWords = this.tagline.split(' ');
-    let charCounter = 0;
-    this.taglineWords = rawWords.map(word => {
-      const letters = word.split('').map(char => {
-        const globalIndex = charCounter++;
-        return { char, globalIndex };
-      });
-      charCounter++;
-      return { letters };
-    });
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.initParticles();
@@ -39,7 +23,7 @@ export class HeroComponent implements OnInit, AfterViewInit {
   }
 
   openWhatsApp(): void {
-    this.whatsapp.general();
+    this.whatsapp.openChat('Hello Sri Ram Tours & Travels, I would like to inquire about booking/packages.');
   }
 
   scrollDown(): void {
@@ -71,17 +55,17 @@ export class HeroComponent implements OnInit, AfterViewInit {
     }
 
     const particles: Particle[] = [];
-    const count = 40;
+    const count = 35; // Minimal count for elegant, non-distracting drift
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.5 + 0.1,
-        color: Math.random() > 0.5 ? '#2ecc71' : '#f5a623'
+        size: Math.random() * 2 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.2,
+        speedY: (Math.random() - 0.5) * 0.1,
+        opacity: Math.random() * 0.25 + 0.05,
+        color: Math.random() > 0.5 ? '#c7b793' : '#f8f8e2' // Warm Sand/Gold & Cream matching the new palette
       });
     }
 
@@ -109,3 +93,4 @@ export class HeroComponent implements OnInit, AfterViewInit {
     animate();
   }
 }
+

@@ -29,19 +29,13 @@ export class ExperiencesComponent {
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
       title: 'Educational Trips',
       copy: 'Where classrooms meet the open road',
-      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c476?w=800&q=80'
-    },
-    {
-      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
-      title: 'Corporate & Events',
-      copy: 'Seamless logistics for your business gatherings',
-      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'
+      image: 'https://images.unsplash.com/photo-1557223562-6c77ef16210f?w=800&q=80'
     },
     {
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.6L3 8l6 4.5-3.5 3.5-2.5-.5-1.5 1.5 3.5 1.5 1.5 3.5 1.5-1.5-.5-2.5 3.5-3.5 4.5 6c.4-.2.7-.6.6-1.1z"/></svg>',
       title: 'Ticket Booking',
       copy: 'Flights, trains — all under one roof',
-      image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db56?w=800&q=80'
+      image: 'https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?w=800&q=80'
     },
     {
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>',

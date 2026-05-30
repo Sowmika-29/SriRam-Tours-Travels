@@ -10,7 +10,7 @@
   transition: all 0.4s ease;
 
   &.scrolled {
-    background: rgba(31, 41, 55, 0.95);
+    background: rgba($emerald-dark, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);

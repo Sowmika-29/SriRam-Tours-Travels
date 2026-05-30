@@ -5,177 +5,497 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
+  background-color: $emerald-dark; // Fallback background
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
 
-  img {
+  .zoom-bg {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.05);
+    animation: zoomBackground 24s ease-in-out infinite alternate;
   }
 }
 
+// Multi-layered cinematic overlays for extreme legibility & depth
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(15, 118, 110, 0.6));
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 22, 20, 0.75) 0%,
+    rgba(11, 22, 20, 0.4) 50%,
+    rgba(11, 22, 20, 0.85) 100%
+  );
   z-index: 1;
+}
+
+.hero-radial-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 40%,
+    transparent 0%,
+    rgba(11, 22, 20, 0.3) 60%,
+    rgba(11, 22, 20, 0.7) 100%
+  );
+  z-index: 2;
 }
 
 .particles-canvas {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
 }
 
 .hero-content {
   position: relative;
   z-index: $z-content;
-  max-width: 1320px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
-  padding-top: 100px;
+  padding: 120px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
-  @media (max-width: $bp-mobile) {
-    padding: 0 16px;
-    padding-top: 80px;
+  @media (max-width: $bp-tablet) {
+    padding: 100px 20px 60px;
   }
+  @media (max-width: $bp-mobile) {
+    padding: 95px 16px 50px;
+  }
+}
+
+// --- Luxury Badge ---
+.hero-badge-wrapper {
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUpHero 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero-badge {
-  display: inline-block;
-  padding: 8px 24px;
-  background: rgba($gold, 0.15);
-  border: 1px solid rgba($gold, 0.3);
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  background: rgba($ivory, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba($gold, 0.25);
   border-radius: $radius-pill;
-  color: $gold;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-bottom: 32px;
-  animation: fadeInUp 0.8s ease forwards;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: $transition-base;
 
-  @media (max-width: $bp-mobile) {
-    font-size: 12px;
-    padding: 6px 16px;
+  &:hover {
+    border-color: rgba($gold, 0.5);
+    background: rgba($ivory, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background-color: $gold;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 8px $gold;
+    animation: badgeDotPulse 2s infinite ease-in-out;
+  }
+
+  .badge-text {
+    color: $ivory;
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    @media (max-width: $bp-mobile) {
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
   }
 }
 
-// Bus Heading Animation
-.bus-heading-wrapper {
-  position: relative;
+// --- Typographic Title ---
+.hero-title {
+  font-family: $font-heading;
+  font-size: 80px;
+  font-weight: 400;
+  color: $ivory;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
   margin-bottom: 24px;
-  min-height: 110px;
+  max-width: 950px;
 
   @media (max-width: $bp-tablet) {
-    min-height: 80px;
+    font-size: 56px;
   }
   @media (max-width: $bp-mobile) {
-    min-height: 60px;
+    font-size: 38px;
+    letter-spacing: 0px;
+    line-height: 1.25;
   }
 
-  // Removed bus icon styles
+  .title-line {
+    display: block;
+    overflow: hidden;
+    padding: 4px 0;
+  }
 
-  h1 {
+  .text-reveal {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: textRevealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .highlight-serif {
     font-family: $font-heading;
-    font-size: $h1-size;
-    color: $ivory;
-    line-height: 1.1;
-
-    @media (max-width: $bp-tablet) { font-size: $h1-tablet; }
-    @media (max-width: $bp-mobile) { font-size: $h1-mobile; }
-
-    .word-wrapper {
-      display: inline-block;
-      white-space: nowrap;
-    }
-  }
-
-  .heading-letter {
+    font-style: italic;
+    font-weight: 400;
+    
+    // Sophisticated gold metallic gradient
+    background: linear-gradient(135deg, $gold-light 0%, $gold 50%, $gold-hover 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    // Fallback outline shadow for legibility
+    filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.25));
     display: inline-block;
-    opacity: 0;
-
-    &.animate {
-      animation: letterReveal 0.3s ease forwards;
-    }
   }
-
-  .heading-space {
-    display: inline-block;
-    width: 0.3em;
-  }
-
-  // Removed gold line
 }
 
+// --- Subtitle ---
 .hero-sub {
-  font-size: 20px;
-  color: rgba($ivory, 0.8);
+  font-family: $font-body;
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba($ivory, 0.85);
+  max-width: 760px;
   margin-bottom: 40px;
-  animation: fadeInUp 0.8s ease 0.3s both;
-  letter-spacing: 1px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUpHero 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 
+  @media (max-width: $bp-tablet) {
+    font-size: 17px;
+    max-width: 650px;
+  }
   @media (max-width: $bp-mobile) {
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.5;
   }
 }
 
+// --- Premium Call to Actions ---
 .hero-ctas {
   display: flex;
-  gap: 16px;
+  gap: 18px;
+  justify-content: center;
   flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease 0.5s both;
-
-  .btn-outline {
-    color: $ivory;
-    border-color: rgba($ivory, 0.6);
-    
-    &:hover {
-      background: rgba($ivory, 0.1);
-      border-color: $ivory;
-    }
-  }
+  width: 100%;
+  margin-bottom: 56px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUpHero 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
 
   @media (max-width: $bp-mobile) {
     flex-direction: column;
     gap: 12px;
+    align-items: stretch;
+    padding: 0 12px;
+  }
 
-    .btn {
+  .btn {
+    min-width: 190px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @media (max-width: $bp-mobile) {
       width: 100%;
-      justify-content: center;
+    }
+  }
+
+  .btn-premium-primary {
+    background: $primary-green;
+    border: 1px solid rgba($primary-green, 0.5);
+    color: #ffffff;
+
+    .btn-arrow {
+      margin-left: 8px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    &:hover {
+      background: $green-mid;
+      border-color: $green-mid;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba($primary-green, 0.3);
+
+      .btn-arrow {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  .btn-premium-outline {
+    background: rgba($ivory, 0.03);
+    border: 1px solid rgba($ivory, 0.4);
+    color: $ivory;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    &:hover {
+      background: $ivory;
+      border-color: $ivory;
+      color: $text-dark;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba($ivory, 0.15);
+    }
+  }
+
+  .btn-premium-gold {
+    background: linear-gradient(135deg, $gold, $gold-light);
+    border: 1px solid rgba($gold, 0.4);
+    color: $emerald-dark;
+    box-shadow: 0 10px 30px rgba($gold, 0.15);
+
+    &:hover {
+      background: linear-gradient(135deg, $gold-hover, $gold);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba($gold, 0.3);
     }
   }
 }
 
+// --- Trust Stats Section ---
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  max-width: 800px;
+
+  @media (max-width: $bp-tablet) {
+    gap: 16px;
+    max-width: 600px;
+  }
+  @media (max-width: $bp-mobile) {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 160px;
+    padding: 18px 24px;
+    background: rgba($ivory, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba($ivory, 0.08);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    // Sequential fade in
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUpHero 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    @media (max-width: $bp-mobile) {
+      width: 100%;
+      max-width: 280px;
+      padding: 14px 20px;
+    }
+
+    &:hover {
+      background: rgba($ivory, 0.06);
+      border-color: rgba($gold, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-num {
+      font-family: $font-heading;
+      font-size: 34px;
+      font-weight: 700;
+      color: $gold;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      
+      @media (max-width: $bp-tablet) {
+        font-size: 28px;
+      }
+    }
+
+    .stat-label {
+      font-family: $font-body;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba($ivory, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 6px;
+
+      @media (max-width: $bp-tablet) {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+// --- Scroll Down Indicator ---
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: $z-content;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
   cursor: pointer;
-  animation: fadeIn 1s ease 2s both;
+  opacity: 0;
+  animation: fadeInIndicator 1s ease 1.5s forwards;
 
-  .scroll-arrow {
-    font-size: 24px;
-    color: $gold;
-    animation: bounceArrow 2s ease infinite;
+  @media (max-width: $bp-mobile) {
+    bottom: 20px;
+  }
+
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba($ivory, 0.4);
+    border-radius: 14px;
+    position: relative;
+    display: block;
+    margin-bottom: 8px;
+    transition: $transition-base;
+
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background-color: $gold;
+      border-radius: 2px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheelPulse 1.6s infinite ease-in-out;
+    }
   }
 
   .scroll-text {
-    font-size: 12px;
-    color: rgba($beige, 0.5);
-    letter-spacing: 2px;
+    font-family: $font-body;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba($ivory, 0.5);
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    transition: $transition-base;
+  }
+
+  &:hover {
+    .scroll-mouse {
+      border-color: rgba($ivory, 0.8);
+      transform: translateY(2px);
+    }
+    .scroll-text {
+      color: rgba($ivory, 0.8);
+    }
+  }
+}
+
+// ========================================
+// Component Keyframe Animations
+// ========================================
+@keyframes zoomBackground {
+  0% {
+    transform: scale(1.03) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(1.12) translate(-0.5%, -0.2%);
+  }
+}
+
+@keyframes badgeDotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+    box-shadow: 0 0 4px $gold;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+    box-shadow: 0 0 12px $gold;
+  }
+}
+
+@keyframes textRevealUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUpHero {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInIndicator {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollWheelPulse {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, 12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 0;
   }
 }

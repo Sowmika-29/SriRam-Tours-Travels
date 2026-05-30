@@ -3,27 +3,27 @@
 // Matched to Logo: Forest Green Globe + Bus + Airplane
 // ========================================
 
-// PRIMARY COLORS (Luxury Editorial)
-$primary-green:    #0F766E;   // Primary Emerald
-$emerald:          #0F766E;   // Alias for backwards compatibility
-$sage:             #7A9E92;   // Soft Sage
-$emerald-dark:     #0b1614;   // Dark Emerald (for footer)
-$gold:             #C6A969;   // Muted Gold Accent
-$gold-light:       #e0c382;   // Lighter Gold
-$beige:            #F5EBDD;   // Beige Sand
-$ivory:            #FCFBF8;   // Warm Ivory
-$cream:            #FCFBF8;   // Map cream to ivory
-$dark-overlay:     rgba(15, 118, 110, 0.2); // Soft emerald overlay
+// PRIMARY COLORS (Luxury Editorial - Custom Earthy Green Palette)
+$primary-green:    #5c724a;   // Primary Olive (Color 4)
+$emerald:          #5c724a;   // Alias for backwards compatibility (Color 4)
+$sage:             #a3b68a;   // Soft Sage (Color 3)
+$emerald-dark:     #1f2d1c;   // Dark Forest Green (Color 5 variant for deep contrast)
+$gold:             #c7b793;   // Warm Sand / Gold Accent (Color 2)
+$gold-light:       #dbd1bb;   // Lighter Sand / Gold
+$beige:            #ebe3d1;   // Beige Sand
+$ivory:            #f8f8e2;   // Warm Cream/Ivory (Color 1)
+$cream:            #f8f8e2;   // Map cream to ivory
+$dark-overlay:     rgba(92, 114, 74, 0.2); // Soft olive overlay (based on Color 4)
 
 // EXTENDED PALETTE
-$green-mid:        #115E59;   // Hover Emerald
-$cream-white:      #FCFBF8;   // Warm Ivory
-$gold-hover:       #a88e55;   // Darker gold for hover states
-$text-dark:        #111C19;   // Ultra-deep Emerald-Charcoal for premium headings
-$text-muted:       #445650;   // Sophisticated Sage-Charcoal for readable paragraphs
-$slate:            #445650;   // Alias for backwards compatibility
-$glass-bg:         rgba(252, 251, 248, 0.4); // Light glass
-$glass-border:     rgba(252, 251, 248, 0.6);
+$green-mid:        #4b5e3c;   // Hover Green (slightly darker Color 4)
+$cream-white:      #f8f8e2;   // Warm Cream/Ivory
+$gold-hover:       #b3a178;   // Darker gold/sand for hover states
+$text-dark:        #1b2818;   // Ultra-deep Forest-Charcoal for premium headings (Color 5 variant)
+$text-muted:       #4e5c46;   // Sophisticated Olive-Charcoal for readable paragraphs
+$slate:            #4e5c46;   // Alias for backwards compatibility
+$glass-bg:         rgba(248, 248, 226, 0.4); // Light cream glass
+$glass-border:     rgba(248, 248, 226, 0.6);
 
 // FONT FAMILIES
 $font-heading:     'Cormorant Garamond', serif;
