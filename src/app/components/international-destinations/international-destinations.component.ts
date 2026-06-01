@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 import { WhatsappService } from '../../services/whatsapp.service';
 import { AnimatedHeadingComponent } from '../animated-heading/animated-heading.component';
@@ -10,7 +11,7 @@ import { AnimatedHeadingComponent } from '../animated-heading/animated-heading.c
   templateUrl: './international-destinations.component.html',
   styleUrl: './international-destinations.component.scss'
 })
-export class InternationalDestinationsComponent {
+export class InternationalDestinationsComponent implements OnInit {
 
   destinations = [
     { name: 'Bali', tagline: 'Hidden jungle escapes and serene sunsets.', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80' },
@@ -25,8 +26,24 @@ export class InternationalDestinationsComponent {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private whatsapp: WhatsappService
   ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const highlight = params['highlight'];
+      if (highlight) {
+        setTimeout(() => {
+          const el = document.getElementById(highlight);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('highlight-pulse');
+          }
+        }, 500);
+      }
+    });
+  }
 
   bookDestination(name: string): void {
     this.whatsapp.destination(name);

@@ -1,0 +1,295 @@
+@use '../../../styles/variables' as *;
+
+// ========================================
+// Vision, Mission & Values Section
+// ========================================
+.vmv-section {
+  background: linear-gradient(to bottom, $ivory 0%, $beige 100%);
+  position: relative;
+}
+
+.vmv-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-top: 48px;
+
+  @media (min-width: $bp-tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.vmv-card {
+  padding: 40px 32px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: $radius-card;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  .vmv-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba($primary-green, 0.05);
+    border: 2px solid rgba($gold, 0.4);
+    color: $primary-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: all 0.4s ease;
+
+    svg {
+      transition: transform 0.4s ease;
+    }
+  }
+
+  h3 {
+    font-family: $font-heading;
+    font-size: 24px;
+    color: $text-dark;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 15px;
+    color: $text-muted;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: rgba($gold, 0.6);
+    box-shadow: $shadow-hover;
+    background: rgba(255, 255, 255, 0.9);
+
+    .vmv-icon {
+      border-color: $gold;
+      background: $primary-green;
+      color: $ivory;
+      box-shadow: 0 8px 20px rgba($primary-green, 0.2);
+
+      svg {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// ========================================
+// Leadership Section
+// ========================================
+.leadership-section {
+  background: $ivory;
+  border-top: 1px solid rgba($gold, 0.15);
+  border-bottom: 1px solid rgba($gold, 0.15);
+}
+
+.leadership-list {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  margin-top: 60px;
+
+  @media (max-width: $bp-tablet) {
+    gap: 70px;
+  }
+}
+
+.leader-row {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+
+  &.alternate {
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: $bp-desktop) {
+    gap: 40px;
+  }
+
+  @media (max-width: $bp-tablet) {
+    flex-direction: column !important;
+    gap: 30px;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.leader-img-wrapper {
+  position: relative;
+  width: 380px;
+  height: 480px;
+  flex-shrink: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid rgba($gold, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+  }
+
+  .leader-tag {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    z-index: 2;
+    background: rgba($emerald-dark, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba($gold, 0.3);
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    .leader-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: $gold;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .leader-name {
+      font-family: $font-heading;
+      font-size: 20px;
+      color: $ivory;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .leader-role {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 2px;
+    }
+  }
+
+  @media (max-width: $bp-mobile) {
+    width: 100%;
+    max-width: 320px;
+    height: 400px;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $gold;
+    box-shadow: 0 25px 50px rgba($gold, 0.2);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.leader-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+
+  @media (max-width: $bp-tablet) {
+    align-items: center;
+    text-align: center;
+  }
+
+  h2 {
+    font-family: $font-heading;
+    font-size: 36px;
+    color: $text-dark;
+    margin-bottom: 8px;
+    font-weight: 700;
+
+    @media (max-width: $bp-mobile) {
+      font-size: 28px;
+    }
+  }
+
+  .leader-subtitle {
+    font-size: 18px;
+    color: $primary-green;
+    font-weight: 500;
+    margin-bottom: 24px;
+    line-height: 1.4;
+
+    @media (max-width: $bp-mobile) {
+      font-size: 16px;
+    }
+  }
+
+  .leader-bio {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 15px;
+    color: $text-muted;
+    line-height: 1.7;
+    margin-bottom: 24px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .leader-quote {
+    position: relative;
+    padding: 20px 24px 20px 54px;
+    border-left: 3px solid $gold;
+    background: rgba($gold, 0.04);
+    border-radius: 0 12px 12px 0;
+    margin: 10px 0 24px 0;
+    text-align: left;
+
+    .quote-icon {
+      position: absolute;
+      left: 18px;
+      top: 20px;
+      color: rgba($gold, 0.35);
+    }
+
+    p {
+      font-family: $font-heading;
+      font-style: italic;
+      font-size: 20px;
+      color: $emerald-dark;
+      line-height: 1.5;
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+
+  .leader-conclusion {
+    font-size: 16px;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 0;
+  }
+}

@@ -108,3 +108,214 @@
     .mood-overlay { background: linear-gradient(180deg, transparent 20%, rgba(11, 31, 20, 0.9) 100%); }
   }
 }
+
+// Mood Modal Styles
+.mood-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba($emerald-dark, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-modal;
+  padding: 24px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.mood-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  background: rgba(248, 248, 226, 0.95);
+  border: 1px solid rgba($gold, 0.4);
+  border-radius: 24px;
+  padding: 40px;
+  overflow-y: auto;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba($gold, 0.4);
+    border-radius: 10px;
+  }
+
+  @media (max-width: $bp-tablet) {
+    padding: 30px 20px;
+    max-height: 90vh;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba($emerald-dark, 0.05);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: $text-dark;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $emerald-dark;
+      color: $ivory;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.mood-modal-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  .mood-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba($emerald, 0.1);
+    color: $emerald-dark;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+    border: 1px solid rgba($emerald, 0.2);
+  }
+
+  h2 {
+    font-family: $font-heading;
+    font-size: 38px;
+    color: $text-dark;
+    margin-bottom: 8px;
+
+    @media (max-width: $bp-mobile) {
+      font-size: 28px;
+    }
+  }
+
+  p {
+    font-family: $font-body;
+    font-size: 15px;
+    color: $text-muted;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.mood-destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dest-item-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba($gold, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $gold;
+    box-shadow: 0 12px 25px rgba($emerald-dark, 0.1);
+
+    .dest-img-wrapper img {
+      transform: scale(1.05);
+    }
+  }
+
+  .dest-img-wrapper {
+    position: relative;
+    height: 140px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .dest-type-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      background: $primary-green;
+      color: $ivory;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+      &.intl {
+        background: $gold-hover;
+      }
+    }
+  }
+
+  .dest-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    h3 {
+      font-family: $font-heading;
+      font-size: 20px;
+      color: $text-dark;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    p {
+      font-family: $font-body;
+      font-size: 13px;
+      color: $text-muted;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

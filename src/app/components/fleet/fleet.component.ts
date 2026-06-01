@@ -14,9 +14,9 @@ import { AnimatedHeadingComponent } from '../animated-heading/animated-heading.c
 export class FleetComponent {
 
   flagshipVehicle = {
-    type: 'Luxury AC Coach',
+    type: 'Luxury Non AC Coach',
     capacity: '45 seats',
-    features: ['Recliner seats', 'AC', 'USB charging', 'Music system', 'WiFi'],
+    features: ['Recliner seats', 'USB charging', 'Music system', 'WiFi'],
     bestFor: 'Long tours, Corporate trips, Weddings',
     image: 'images/bus.jpeg'
   };

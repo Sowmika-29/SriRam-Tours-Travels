@@ -340,3 +340,34 @@ input, textarea, select {
   display: inline-block;
   width: 0.3em;
 }
+
+// ========================================
+// Highlight Target Animation
+// ========================================
+@keyframes highlightGlow {
+  0% {
+    box-shadow: 0 0 0 0px rgba(199, 183, 147, 0.8);
+    border-color: #c7b793;
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-10px);
+  }
+  50% {
+    box-shadow: 0 0 30px 15px rgba(199, 183, 147, 0.6);
+    border-color: #c7b793;
+    transform: translateY(-10px);
+  }
+  75% {
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(199, 183, 147, 0);
+  }
+}
+
+.highlight-pulse {
+  animation: highlightGlow 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  position: relative;
+  z-index: 10;
+}

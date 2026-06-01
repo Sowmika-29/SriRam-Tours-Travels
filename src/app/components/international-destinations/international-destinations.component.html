@@ -6,7 +6,7 @@
     <!-- Magazine Layout -->
     <div class="intl-grid">
       @for (dest of destinations; track dest.name; let i = $index) {
-        <div class="intl-card" [class]="'intl-card mag-' + i"
+        <div class="intl-card" [class]="'intl-card mag-' + i" [id]="dest.name"
              scrollReveal [revealDelay]="i * 80">
           <div class="intl-image">
             <img [src]="dest.image" [alt]="dest.name" loading="lazy">

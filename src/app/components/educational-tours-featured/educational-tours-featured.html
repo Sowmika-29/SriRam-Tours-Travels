@@ -1,0 +1,60 @@
+<section class="edu-featured section-padding" id="educational-tours-featured">
+  <div class="container">
+    <app-animated-heading >
+      text="Educational Journeys Beyond Classrooms" 
+    </app-animated-heading>
+
+    <div class="edu-cards-container" scrollReveal>
+      <!-- School Tours Card -->
+      <div class="edu-cinematic-card" (click)="exploreTours('School Tours (1 Day)')">
+        <div class="card-bg">
+          <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&q=80" alt="School Tours" loading="lazy">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-badge">1-Day Trips</div>
+        <div class="card-content">
+          <span class="card-pretitle">Primary & Secondary</span>
+          <h3>School Tours</h3>
+          <p class="card-description">
+            Curated single-day excursions that turn textbook chapters into real-world discoveries. We visit ancient temples, botanical reserves, science parks, and dams with focus on safety, learning, and fun.
+          </p>
+          <span class="card-link">
+            View Packages
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="arrow-icon">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- College Tours Card -->
+      <div class="edu-cinematic-card" (click)="exploreTours('College Tours (2 Days)')">
+        <div class="card-bg">
+          <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&q=80" alt="College Tours" loading="lazy">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-badge">2-3 Days Trips</div>
+        <div class="card-content">
+          <span class="card-pretitle">Higher Education & Adventure</span>
+          <h3>College Tours</h3>
+          <p class="card-description">
+            Immersive multi-day travel programs combining industrial exposure, historical heritage, nature exploration, and team bonding. Custom itineraries built with high-quality transport and lodging.
+          </p>
+          <span class="card-link">
+            View Packages
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="arrow-icon">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Section CTA -->
+    <div class="edu-section-cta text-center" scrollReveal [revealDelay]="200">
+      <button class="btn btn-gold btn-large" (click)="exploreTours()">
+        Explore Educational Tours
+      </button>
+    </div>
+  </div>
+</section>

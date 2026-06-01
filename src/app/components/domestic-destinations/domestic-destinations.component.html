@@ -6,7 +6,7 @@
     <!-- Destination Cards -->
     <div class="dest-grid">
       @for (dest of destinations; track dest.name; let i = $index) {
-        <div class="dest-card" [class]="'dest-card pos-' + i"
+        <div class="dest-card" [class]="'dest-card pos-' + i" [id]="dest.name"
              scrollReveal [revealDelay]="i * 100">
           <div class="dest-image">
             <img [src]="dest.image" [alt]="dest.name" loading="lazy">

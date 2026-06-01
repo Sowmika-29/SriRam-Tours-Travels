@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 import { WhatsappService } from '../../services/whatsapp.service';
 import { AnimatedHeadingComponent } from '../animated-heading/animated-heading.component';
+
+interface MoodDestination {
+  name: string;
+  tagline: string;
+  image: string;
+  type: 'Domestic' | 'International';
+}
 
 @Component({
   selector: 'app-mood-explorer',
@@ -45,11 +53,72 @@ export class MoodExplorerComponent {
     }
   ];
 
+  selectedMoodName: string | null = null;
+  isMoodModalOpen = false;
+  activeDestinations: MoodDestination[] = [];
+
+  moodDestinations: { [key: string]: MoodDestination[] } = {
+    'Adventure': [
+      { name: 'Kashmir', tagline: 'Snow-covered valleys, untouched silence.', image: 'https://images.unsplash.com/photo-1597074866923-dc0589150358?w=800&q=80', type: 'Domestic' },
+      { name: 'Himachal Pradesh', tagline: 'Where the mountains whisper your name.', image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80', type: 'Domestic' },
+      { name: 'Ladakh', tagline: 'The roof of the world awaits you.', image: 'https://images.unsplash.com/photo-1614603187928-81a1e3e6a4e9?w=800&q=80', type: 'Domestic' },
+      { name: 'Switzerland', tagline: 'Panoramic alpine journeys beyond imagination.', image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80', type: 'International' },
+      { name: 'Bali', tagline: 'Hidden jungle escapes and serene sunsets.', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80', type: 'International' }
+    ],
+    'Romantic Escapes': [
+      { name: 'Munnar', tagline: 'Wake up to misty tea estates.', image: 'https://images.unsplash.com/photo-1625553200007-1ea025f1a928?w=800&q=80', type: 'Domestic' },
+      { name: 'Kerala', tagline: "God's own country, your own pace.", image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80', type: 'Domestic' },
+      { name: 'Maldives', tagline: 'Endless blue horizons and overwater luxury.', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80', type: 'International' },
+      { name: 'Bali', tagline: 'Hidden jungle escapes and serene sunsets.', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80', type: 'International' }
+    ],
+    'Nature Retreats': [
+      { name: 'Munnar', tagline: 'Wake up to misty tea estates.', image: 'https://images.unsplash.com/photo-1625553200007-1ea025f1a928?w=800&q=80', type: 'Domestic' },
+      { name: 'Kerala', tagline: "God's own country, your own pace.", image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80', type: 'Domestic' },
+      { name: 'Sikkim', tagline: 'Hidden Himalayan treasure, untouched.', image: 'https://images.unsplash.com/photo-1626686010641-01e35fd5bcab?w=800&q=80', type: 'Domestic' },
+      { name: 'Switzerland', tagline: 'Panoramic alpine journeys beyond imagination.', image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80', type: 'International' },
+      { name: 'Sri Lanka', tagline: 'Ancient temples, wild jungles, turquoise coasts.', image: 'https://images.unsplash.com/photo-1586523731803-a4c916e19d51?w=800&q=80', type: 'International' }
+    ],
+    'Luxury': [
+      { name: 'Rajasthan', tagline: 'Golden deserts and royal grandeur.', image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80', type: 'Domestic' },
+      { name: 'Maldives', tagline: 'Endless blue horizons and overwater luxury.', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80', type: 'International' },
+      { name: 'Dubai', tagline: 'Where dreams are built in gold.', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80', type: 'International' },
+      { name: 'Singapore', tagline: 'The city where future meets culture.', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80', type: 'International' }
+    ],
+    'Beach Bliss': [
+      { name: 'Goa', tagline: 'Sun, sand, and endless freedom.', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80', type: 'Domestic' },
+      { name: 'Andaman', tagline: 'Crystal waters and coral dreams.', image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80', type: 'Domestic' },
+      { name: 'Maldives', tagline: 'Endless blue horizons and overwater luxury.', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80', type: 'International' },
+      { name: 'Lakshadweep', tagline: "India's secret paradise, finally yours.", image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80', type: 'International' },
+      { name: 'Bali', tagline: 'Hidden jungle escapes and serene sunsets.', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80', type: 'International' }
+    ],
+    'Weekend Escapes': [
+      { name: 'Munnar', tagline: 'Wake up to misty tea estates.', image: 'https://images.unsplash.com/photo-1625553200007-1ea025f1a928?w=800&q=80', type: 'Domestic' },
+      { name: 'Goa', tagline: 'Sun, sand, and endless freedom.', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80', type: 'Domestic' },
+      { name: 'Malaysia', tagline: 'A melting pot of wonders and flavors.', image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80', type: 'International' },
+      { name: 'Thailand', tagline: 'Temples, beaches, and vibrant street life.', image: 'https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80', type: 'International' }
+    ]
+  };
+
   constructor(
+    private router: Router,
     private whatsapp: WhatsappService
   ) {}
 
   selectMood(name: string): void {
-    this.whatsapp.mood(name);
+    this.selectedMoodName = name;
+    this.activeDestinations = this.moodDestinations[name] || [];
+    this.isMoodModalOpen = true;
+  }
+
+  closeMoodModal(): void {
+    this.isMoodModalOpen = false;
+    this.selectedMoodName = null;
+    this.activeDestinations = [];
+  }
+
+  exploreDestination(dest: MoodDestination): void {
+    this.closeMoodModal();
+    const targetRoute = dest.type === 'Domestic' ? '/domestic-trips' : '/international-trips';
+    this.router.navigate([targetRoute], { queryParams: { highlight: dest.name } });
   }
 }

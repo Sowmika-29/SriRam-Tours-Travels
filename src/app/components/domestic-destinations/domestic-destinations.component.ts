@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 import { WhatsappService } from '../../services/whatsapp.service';
 import { AnimatedHeadingComponent } from '../animated-heading/animated-heading.component';
@@ -10,7 +11,7 @@ import { AnimatedHeadingComponent } from '../animated-heading/animated-heading.c
   templateUrl: './domestic-destinations.component.html',
   styleUrl: './domestic-destinations.component.scss'
 })
-export class DomesticDestinationsComponent {
+export class DomesticDestinationsComponent implements OnInit {
 
   destinations = [
     { name: 'Munnar', tagline: 'Wake up to misty tea estates.', image: 'https://images.unsplash.com/photo-1625553200007-1ea025f1a928?w=800&q=80' },
@@ -25,10 +26,26 @@ export class DomesticDestinationsComponent {
   ];
 
   constructor(
+    private route: ActivatedRoute,
     private whatsapp: WhatsappService
   ) {
     // Fix Andaman image
     this.destinations[7].image = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80';
+  }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const highlight = params['highlight'];
+      if (highlight) {
+        setTimeout(() => {
+          const el = document.getElementById(highlight);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('highlight-pulse');
+          }
+        }, 500);
+      }
+    });
   }
 
   bookDestination(name: string): void {

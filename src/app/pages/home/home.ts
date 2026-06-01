@@ -5,6 +5,7 @@ import { MoodExplorerComponent } from '../../components/mood-explorer/mood-explo
 import { WhyChooseUsComponent } from '../../components/why-choose-us/why-choose-us.component';
 import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
 import { CtaBannerComponent } from '../../components/cta-banner/cta-banner.component';
+import { EducationalToursFeaturedComponent } from '../../components/educational-tours-featured/educational-tours-featured';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { CtaBannerComponent } from '../../components/cta-banner/cta-banner.compo
     MoodExplorerComponent,
     WhyChooseUsComponent,
     TestimonialsComponent,
-    CtaBannerComponent
+    CtaBannerComponent,
+    EducationalToursFeaturedComponent
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss'

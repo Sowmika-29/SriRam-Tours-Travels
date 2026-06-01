@@ -22,3 +22,40 @@
     </div>
   </div>
 </section>
+
+<!-- Mood Destinations Modal Overlay -->
+@if (isMoodModalOpen && selectedMoodName) {
+  <div class="mood-modal-backdrop" (click)="closeMoodModal()">
+    <div class="mood-modal-content glass-card" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeMoodModal()" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="mood-modal-header">
+        <span class="mood-badge">{{ selectedMoodName }}</span>
+        <h2>Select Your Destination</h2>
+        <p>Explore premium itineraries perfectly suited for your preferred travel mood.</p>
+      </div>
+
+      <div class="mood-destinations-grid">
+        @for (dest of activeDestinations; track dest.name) {
+          <div class="dest-item-card">
+            <div class="dest-img-wrapper">
+              <img [src]="dest.image" [alt]="dest.name" loading="lazy">
+              <span class="dest-type-badge" [class.intl]="dest.type === 'International'">{{ dest.type }}</span>
+            </div>
+            <div class="dest-info">
+              <h3>{{ dest.name }}</h3>
+              <p>{{ dest.tagline }}</p>
+              <button class="btn btn-gold btn-sm w-100" (click)="exploreDestination(dest)">
+                Explore Details & Itinerary
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

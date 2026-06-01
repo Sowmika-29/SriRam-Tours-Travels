@@ -1,6 +1,5 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { WhatsappService } from '../../services/whatsapp.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,13 +16,11 @@ export class NavbarComponent {
     { label: 'Home', href: '/' },
     { label: 'Domestic', href: '/domestic-trips' },
     { label: 'International', href: '/international-trips' },
+    { label: 'Educational Tours', href: '/educational-tours' },
     { label: 'Fleet', href: '/fleet' },
     { label: 'Services', href: '/services' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' }
+    { label: 'About', href: '/about' }
   ];
-
-  constructor(private whatsapp: WhatsappService) {}
 
   @HostListener('window:scroll')
   onScroll(): void {
@@ -38,9 +35,5 @@ export class NavbarComponent {
   closeMobileMenu(): void {
     this.isMobileMenuOpen.set(false);
     document.body.style.overflow = '';
-  }
-
-  whatsappChat(): void {
-    this.whatsapp.general();
   }
 }

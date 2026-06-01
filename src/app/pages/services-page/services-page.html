@@ -1,6 +1,6 @@
 <section class="page-hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1518398046578-8cca57782e17?auto=format&fit=crop&q=80" alt="Our Services">
+    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1600&q=80" alt="Our Services">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -11,51 +11,68 @@
 
 <app-services></app-services>
 
-<section class="school-tours section-padding">
+<!-- Premium Educational Services Block -->
+<section class="educational-featured-services section-padding">
   <div class="container">
-    <!-- Animated Heading with Bus -->
-    <app-animated-heading text="Educational Excursions" subtitle="Curated tour packages designed specifically for schools and colleges."></app-animated-heading>
+    <app-animated-heading 
+      text="Specialized Educational Journeys" 
+      subtitle="We are pioneers in crafting safe, informative, and engaging excursions tailored to meet academic standards.">
+    </app-animated-heading>
 
-    <div class="tours-wrapper">
-      <!-- One Day Tours -->
-      <div class="tour-category glass-card">
-        <div class="category-header">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <h3>One Day School Tours</h3>
+    <div class="edu-services-grid" scrollReveal>
+      <!-- School Educational Tours -->
+      <div class="edu-service-card glass-card">
+        <div class="card-image-box">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80" alt="School Educational Tours" loading="lazy">
         </div>
-        <ul class="tour-list">
-          @for (tour of oneDayTours; track tour; let i = $index) {
-            <li>
-              <span class="tour-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
-              <p class="tour-desc">{{ tour }}</p>
-            </li>
-          }
-        </ul>
+        <h3>School Educational Tours</h3>
       </div>
 
-      <!-- Two Day Tours -->
-      <div class="tour-category glass-card">
-        <div class="category-header">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          <h3>Two Days School Tours</h3>
+      <!-- College Educational Tours -->
+      <div class="edu-service-card glass-card">
+        <div class="card-image-box">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" alt="College Educational Tours" loading="lazy">
         </div>
-        <ul class="tour-list">
-          @for (tour of twoDayTours; track tour; let i = $index) {
-            <li>
-              <span class="tour-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
-              <p class="tour-desc">{{ tour }}</p>
-            </li>
-          }
-        </ul>
+        <h3>College Educational Tours</h3>
       </div>
+
+      <!-- Heritage Visits -->
+      <div class="edu-service-card glass-card">
+        <div class="card-image-box">
+          <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600&q=80" alt="Heritage & Archaeology" loading="lazy">
+        </div>
+        <h3>Heritage & Archaeology</h3>
+      </div>
+
+      <!-- Nature Exploration Trips -->
+      <div class="edu-service-card glass-card">
+        <div class="card-image-box">
+          <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&q=80" alt="Nature & Wildlife Exploration" loading="lazy">
+        </div>
+        <h3>Nature & Wildlife Exploration</h3>
+      </div>
+
+      <!-- Cultural Tours -->
+      <div class="edu-service-card glass-card">
+        <div class="card-image-box">
+          <img src="https://images.unsplash.com/photo-1617631493756-d922498942b2?w=600&q=80" alt="Cultural Heritage Tours" loading="lazy">
+        </div>
+        <h3>Cultural Heritage Tours</h3>
+      </div>
+
+      <!-- Multi-Day Student Experiences -->
+      <div class="edu-service-card glass-card">
+        <div class="card-image-box">
+          <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80" alt="Multi-Day Excursions" loading="lazy">
+        </div>
+        <h3>Multi-Day Excursions</h3>
+      </div>
+    </div>
+
+    <div class="services-cta text-center" scrollReveal [revealDelay]="150">
+      <a routerLink="/educational-tours" class="btn btn-gold btn-large">
+        Explore Educational Packages
+      </a>
     </div>
   </div>
 </section>

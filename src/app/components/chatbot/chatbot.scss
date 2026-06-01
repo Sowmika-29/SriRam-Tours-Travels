@@ -73,8 +73,8 @@
 
 .chat-header {
   padding: 16px 20px;
-  background: rgba($primary-green, 0.4);
-  border-bottom: 1px solid rgba($gold, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba($gold, 0.15);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,29 +85,33 @@
     gap: 12px;
 
     .bot-avatar {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: rgba($gold, 0.2);
+      background: rgba($gold, 0.15);
       color: $gold;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid rgba($gold, 0.3);
     }
 
     h4 {
       font-size: 15px;
-      color: $text-dark;
+      color: $ivory;
       margin: 0 0 2px 0;
       font-weight: 600;
+      font-family: $font-heading;
+      letter-spacing: 0.5px;
     }
 
     .status {
       font-size: 12px;
-      color: $emerald;
+      color: #4ade80;
       display: flex;
       align-items: center;
       gap: 6px;
+      font-weight: 500;
 
       &::before {
         content: '';
@@ -115,23 +119,36 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: $emerald;
+        background: #4ade80;
+        box-shadow: 0 0 8px #4ade80;
+        animation: pulseGreen 2s infinite;
       }
     }
   }
 
   .close-btn {
     background: transparent;
-    color: rgba($text-dark, 0.6);
+    color: rgba($ivory, 0.6);
     border: none;
     cursor: pointer;
-    padding: 4px;
-    transition: color 0.3s;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
-      color: $text-dark;
+      background: rgba(255, 255, 255, 0.08);
+      color: $ivory;
     }
   }
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
 }
 
 .chat-body {
@@ -160,19 +177,19 @@
   animation: messageSlideIn 0.3s ease forwards;
 
   &.bot {
-    background: rgba(255, 255, 255, 0.05);
-    color: $text-dark;
+    background: rgba(255, 255, 255, 0.08);
+    color: $ivory;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   &.user {
-    background: linear-gradient(135deg, rgba($gold, 0.15), rgba($gold-light, 0.1));
-    color: $gold-light;
+    background: linear-gradient(135deg, $emerald, $emerald-dark);
+    color: $ivory;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
-    border: 1px solid rgba($gold, 0.2);
+    border: 1px solid rgba($emerald, 0.3);
   }
 }
 
@@ -184,18 +201,22 @@
   animation: messageSlideIn 0.5s ease forwards;
 
   .chat-option-btn {
-    background: transparent;
+    background: rgba($gold, 0.05);
     border: 1px solid rgba($gold, 0.3);
-    color: $gold;
-    padding: 10px 16px;
+    color: $gold-light;
+    padding: 11px 16px;
     border-radius: 50px;
-    font-size: 13px;
+    font-size: 13.5px;
     text-align: left;
     transition: all 0.3s ease;
     cursor: pointer;
+    font-family: $font-body;
+    font-weight: 500;
 
     &:hover {
-      background: rgba($gold, 0.1);
+      background: rgba($gold, 0.15);
+      border-color: $gold;
+      color: $ivory;
       transform: translateX(4px);
     }
   }
