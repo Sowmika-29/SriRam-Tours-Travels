@@ -63,10 +63,14 @@ $transition-slow:  all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 $transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 // BREAKPOINTS
-$bp-mobile:  480px;
-$bp-tablet:  768px;
-$bp-desktop: 1024px;
-$bp-wide:    1440px;
+$bp-mobile-sm: 360px;
+$bp-mobile:    480px;
+$bp-mobile-lg: 576px;
+$bp-tablet:    768px;
+$bp-desktop:   1024px;
+$bp-laptop:    1200px;
+$bp-wide:      1440px;
+$bp-ultra:     1680px;
 
 // Z-INDEX
 $z-particles:  1;

@@ -66,6 +66,12 @@
   flex-direction: column;
   justify-content: flex-end;
   cursor: pointer;
+  background: #ffffff;
+  border: 1px solid rgba($primary-green, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
 
   .intl-image {
     position: absolute;
@@ -93,9 +99,9 @@
     .intl-price {
       display: inline-block;
       padding: 4px 14px;
-      background: rgba($gold, 0.2);
+      background: rgba($gold, 0.25);
       border-radius: $radius-pill;
-      color: $gold;
+      color: $emerald-dark;
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 12px;
@@ -105,10 +111,8 @@
       font-size: 30px;
       margin-bottom: 8px;
       color: $ivory;
-
-      @media (max-width: $bp-mobile) {
-        font-size: 24px;
-      }
+      font-family: $font-heading;
+      font-weight: 600;
     }
 
     p {
@@ -119,7 +123,159 @@
     }
   }
 
-  &:hover .intl-image img {
-    transform: scale(1.05);
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba($gold, 0.4);
+    box-shadow: 0 15px 35px rgba(92, 114, 74, 0.12);
+
+    .intl-image img {
+      transform: scale(1.06);
+    }
+  }
+
+  // ========================================
+  // Mobile & Tablet Editorial Variations
+  // ========================================
+  @media (max-width: $bp-tablet) {
+    min-height: auto;
+
+    .intl-image {
+      position: relative;
+      height: 220px;
+      width: 100%;
+    }
+
+    .intl-info {
+      padding: 24px;
+      background: #ffffff;
+      
+      h3 {
+        color: $text-dark;
+        font-size: 22px;
+      }
+      p {
+        color: $text-muted;
+      }
+      .intl-price {
+        background: rgba($primary-green, 0.1);
+        color: $primary-green;
+      }
+    }
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  .intl-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px;
+  }
+
+  // 1. Cinematic Banner Cards (mag-0, mag-3, mag-5)
+  .intl-grid .mag-0, 
+  .intl-grid .mag-3, 
+  .intl-grid .mag-5 {
+    min-height: 280px;
+
+    .intl-image {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    .intl-info {
+      background: transparent;
+      padding: 32px 24px;
+
+      h3 {
+        color: $ivory;
+      }
+      p {
+        color: rgba($beige, 0.85);
+      }
+      .intl-price {
+        background: rgba($gold, 0.25);
+        color: $emerald-dark;
+      }
+    }
+  }
+
+  // 2. Image-Left Content-Right split horizontal cards (mag-2, mag-7)
+  .intl-grid .mag-2, 
+  .intl-grid .mag-7 {
+    flex-direction: row;
+    align-items: stretch;
+
+    .intl-image {
+      width: 42%;
+      height: auto;
+      min-height: 180px;
+    }
+
+    .intl-info {
+      width: 58%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    @media (max-width: $bp-mobile) {
+      .intl-image {
+        width: 35%;
+      }
+      .intl-info {
+        width: 65%;
+        padding: 16px;
+        h3 { font-size: 18px; }
+        p { font-size: 13px; }
+      }
+    }
+  }
+
+  // 3. Image-Right Content-Left split horizontal cards (mag-4, mag-8)
+  .intl-grid .mag-4, 
+  .intl-grid .mag-8 {
+    flex-direction: row-reverse;
+    align-items: stretch;
+
+    .intl-image {
+      width: 42%;
+      height: auto;
+      min-height: 180px;
+    }
+
+    .intl-info {
+      width: 58%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    @media (max-width: $bp-mobile) {
+      .intl-image {
+        width: 35%;
+      }
+      .intl-info {
+        width: 65%;
+        padding: 16px;
+        h3 { font-size: 18px; }
+        p { font-size: 13px; }
+      }
+    }
+  }
+
+  // 4. Image-Top Editorial standard cards (mag-1, mag-6)
+  .intl-grid .mag-1, 
+  .intl-grid .mag-6 {
+    flex-direction: column;
+
+    .intl-image {
+      height: 200px;
+    }
+
+    .intl-info {
+      padding: 20px;
+    }
   }
 }

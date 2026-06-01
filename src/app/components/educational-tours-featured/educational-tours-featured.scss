@@ -90,7 +90,7 @@
     transition: $transition-spring;
     transform: translateY(15px);
 
-    @media (max-width: $bp-mobile) {
+    @media (max-width: $bp-desktop) {
       padding: 24px;
       transform: translateY(0);
     }
@@ -126,7 +126,7 @@
       transition: $transition-base;
       max-width: 520px;
 
-      @media (max-width: $bp-mobile) {
+      @media (max-width: $bp-desktop) {
         opacity: 1;
         margin-bottom: 16px;
         font-size: 14px;

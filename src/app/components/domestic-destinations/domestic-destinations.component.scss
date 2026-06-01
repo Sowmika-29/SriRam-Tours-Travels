@@ -33,7 +33,7 @@
   gap: 24px;
 
   // Banner cards span full width
-  .pos-0, .pos-4 {
+  .pos-0, .pos-3, .pos-4 {
     grid-column: span 2;
 
     @media (max-width: $bp-tablet) {
@@ -58,6 +58,12 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background: #ffffff;
+  border: 1px solid rgba($primary-green, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
 
   .dest-image {
     position: absolute;
@@ -86,37 +92,164 @@
       font-size: 28px;
       margin-bottom: 8px;
       color: $ivory;
-
-      @media (max-width: $bp-mobile) {
-        font-size: 22px;
-      }
+      font-family: $font-heading;
+      font-weight: 600;
     }
 
     .dest-tagline {
       color: rgba($beige, 0.75);
       font-style: italic;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       font-size: 15px;
     }
+  }
 
-    .dest-meta {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 16px;
-      font-size: 14px;
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba($gold, 0.4);
+    box-shadow: 0 15px 35px rgba(92, 114, 74, 0.12);
 
-      .dest-duration {
-        color: rgba($beige, 0.7);
+    .dest-image img {
+      transform: scale(1.06);
+    }
+  }
+
+  // ========================================
+  // Mobile & Tablet Editorial Variations
+  // ========================================
+  @media (max-width: $bp-tablet) {
+    min-height: auto;
+
+    .dest-image {
+      position: relative;
+      height: 220px;
+      width: 100%;
+    }
+
+    .dest-info {
+      padding: 24px;
+      background: #ffffff;
+      
+      h3 {
+        color: $text-dark;
+        font-size: 22px;
       }
+      .dest-tagline {
+        color: $text-muted;
+      }
+    }
+  }
+}
 
-      .dest-price {
-        color: $gold;
-        font-weight: 600;
+@media (max-width: $bp-tablet) {
+  // Forces 1-column layout on tablet/mobile so we can apply custom row layouts
+  .dest-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px;
+  }
+
+  // 1. Cinematic Banner Cards (pos-0, pos-3, pos-4, pos-8)
+  .dest-grid .pos-0, 
+  .dest-grid .pos-3, 
+  .dest-grid .pos-4, 
+  .dest-grid .pos-8 {
+    min-height: 280px;
+
+    .dest-image {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    .dest-info {
+      background: transparent;
+      padding: 32px 24px;
+
+      h3 {
+        color: $ivory;
+      }
+      .dest-tagline {
+        color: rgba($beige, 0.85);
       }
     }
   }
 
-  &:hover .dest-image img {
-    transform: scale(1.05);
+  // 2. Image-Left Content-Right split horizontal cards (pos-2, pos-7)
+  .dest-grid .pos-2, 
+  .dest-grid .pos-7 {
+    flex-direction: row;
+    align-items: stretch;
+
+    .dest-image {
+      width: 42%;
+      height: auto;
+      min-height: 180px;
+    }
+
+    .dest-info {
+      width: 58%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    @media (max-width: $bp-mobile) {
+      .dest-image {
+        width: 35%;
+      }
+      .dest-info {
+        width: 65%;
+        padding: 16px;
+        h3 { font-size: 18px; }
+        .dest-tagline { font-size: 13px; }
+      }
+    }
+  }
+
+  // 3. Image-Right Content-Left split horizontal cards (pos-5)
+  .dest-grid .pos-5 {
+    flex-direction: row-reverse;
+    align-items: stretch;
+
+    .dest-image {
+      width: 42%;
+      height: auto;
+      min-height: 180px;
+    }
+
+    .dest-info {
+      width: 58%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    @media (max-width: $bp-mobile) {
+      .dest-image {
+        width: 35%;
+      }
+      .dest-info {
+        width: 65%;
+        padding: 16px;
+        h3 { font-size: 18px; }
+        .dest-tagline { font-size: 13px; }
+      }
+    }
+  }
+
+  // 4. Image-Top Editorial standard cards (pos-1, pos-6)
+  .dest-grid .pos-1, 
+  .dest-grid .pos-6 {
+    flex-direction: column;
+
+    .dest-image {
+      height: 200px;
+    }
+
+    .dest-info {
+      padding: 20px;
+    }
   }
 }

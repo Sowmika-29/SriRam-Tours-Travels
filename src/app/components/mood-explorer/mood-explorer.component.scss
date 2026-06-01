@@ -31,12 +31,12 @@
 
   @media (max-width: $bp-desktop) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 260px);
+    grid-template-rows: auto;
   }
 
   @media (max-width: $bp-mobile) {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 220px);
+    grid-template-rows: auto;
   }
 }
 
@@ -45,9 +45,27 @@
   border-radius: $radius-card;
   overflow: hidden;
   cursor: pointer;
+  height: 100%; // Default to grid row fill on desktop
 
-  &.tile-0 { grid-row: span 1; }
-  &.tile-3 { grid-column: span 1; }
+  // Tablet Staggered Layout
+  @media (max-width: $bp-desktop) {
+    &.tile-0 { height: 320px; }
+    &.tile-1 { height: 250px; }
+    &.tile-2 { height: 250px; }
+    &.tile-3 { height: 320px; }
+    &.tile-4 { height: 280px; }
+    &.tile-5 { height: 280px; }
+  }
+
+  // Mobile Staggered Layout
+  @media (max-width: $bp-mobile) {
+    &.tile-0 { height: 290px; }
+    &.tile-1 { height: 180px; }
+    &.tile-2 { height: 250px; }
+    &.tile-3 { height: 180px; }
+    &.tile-4 { height: 290px; }
+    &.tile-5 { height: 220px; }
+  }
 
   img {
     width: 100%;

@@ -1,28 +1,63 @@
-<section class="testimonials section-padding" id="testimonials">
+<section class="testimonials section-padding" id="testimonials" 
+         (mouseenter)="pause()" 
+         (mouseleave)="resume()">
   <div class="container">
-    <!-- Animated Heading with Bus -->
+    <!-- Animated Heading -->
     <app-animated-heading text="Voices From The Road" subtitle="Real stories from real travelers"></app-animated-heading>
 
-    <!-- Scrapbook Grid -->
-    <div class="testimonial-grid">
-      @for (t of testimonials; track t.name; let i = $index) {
-        <div class="testimonial-card"
-             [style.--rotation]="t.rotation + 'deg'"
-             [style.animation-delay]="(i * 0.3) + 's'">
-          <div class="card-inner">
-            <div class="stars">
-              @for (s of getStars(t.rating); track $index) {
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#f5a623" stroke="#f5a623" stroke-width="2" class="star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              }
+    <!-- Testimonial Slider Wrapper -->
+    <div class="testimonial-slider-wrapper">
+      
+      <!-- Manual Navigation Buttons -->
+      <button class="nav-btn prev-btn" (click)="prev()" aria-label="Previous testimonial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      
+      <button class="nav-btn next-btn" (click)="next()" aria-label="Next testimonial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <!-- Carousel Container -->
+      <div class="testimonial-carousel-container"
+           (touchstart)="onTouchStart($event)"
+           (touchmove)="onTouchMove($event)"
+           (touchend)="onTouchEnd($event)">
+           
+        <div class="testimonial-track" #track>
+          @for (t of displayList; track $index; let i = $index) {
+            <div class="testimonial-card"
+                 [style.--rotation]="t.rotation + 'deg'">
+              <div class="card-inner">
+                <!-- Polaroid Photo -->
+                <div class="card-photo">
+                  <img [src]="t.photo" [alt]="t.name + ' visited'" loading="lazy">
+                </div>
+                
+                <!-- Polaroid Journal Entry -->
+                <div class="card-writeup">
+                  <div class="stars">
+                    @for (s of getStars(t.rating); track $index) {
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5a623" stroke="#f5a623" stroke-width="2" class="star">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                      </svg>
+                    }
+                  </div>
+                  <p class="quote">"{{ t.text }}"</p>
+                  
+                  <div class="author">
+                    <span class="author-name">{{ t.name }}</span>
+                    <span class="author-city">{{ t.city }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p class="quote">{{ t.text }}</p>
-            <div class="author">
-              <span class="author-name">{{ t.name }}</span>
-              <span class="author-city">{{ t.city }}</span>
-            </div>
-          </div>
+          }
         </div>
-      }
+      </div>
     </div>
   </div>
 </section>
