@@ -148,9 +148,11 @@ export class TestimonialsComponent implements OnInit, OnDestroy, AfterViewInit {
     const cards = track.children;
     if (cards.length === 0) return;
     
-    const cardWidth = cards[0].getBoundingClientRect().width;
+    const cardWidth = cards[0].offsetWidth || 350;
+    const containerWidth = track.parentElement.getBoundingClientRect().width;
     const gap = 24;
-    const offset = -(this.activeIndex * (cardWidth + gap));
+    
+    const offset = (containerWidth - cardWidth) / 2 - (this.activeIndex * (cardWidth + gap));
     
     if (animate) {
       track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';

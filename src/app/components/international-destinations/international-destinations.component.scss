@@ -8,7 +8,6 @@
 .train-heading-wrapper {
   position: relative;
 
-
   h2 {
     opacity: 0;
     transform: scale(0.95);
@@ -21,42 +20,23 @@
   }
 }
 
-// Magazine grid
+// ----------------------------------------
+// Grid Layout (Desktop Default: 3 Columns)
+// ----------------------------------------
 .intl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
   gap: 24px;
 
-  .mag-0 {
+  .mag-0, .mag-3 {
     grid-column: span 2;
-    min-height: 420px;
-
-    @media (max-width: $bp-tablet) {
-      grid-column: span 1;
-      min-height: 300px;
-    }
-  }
-
-  .mag-3 {
-    grid-column: span 2;
-    min-height: 380px;
-
-    @media (max-width: $bp-tablet) {
-      grid-column: span 1;
-      min-height: 300px;
-    }
-  }
-
-  @media (max-width: $bp-desktop) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $bp-mobile) {
-    grid-template-columns: 1fr;
+    min-height: 400px;
   }
 }
 
+// ----------------------------------------
+// Card Base Style (Desktop Cinematic Overlay)
+// ----------------------------------------
 .intl-card {
   position: relative;
   border-radius: $radius-card;
@@ -76,6 +56,7 @@
   .intl-image {
     position: absolute;
     inset: 0;
+    transition: all 0.4s ease;
 
     img {
       width: 100%;
@@ -95,6 +76,7 @@
     position: relative;
     z-index: 2;
     padding: 32px;
+    transition: all 0.3s ease;
 
     .intl-price {
       display: inline-block;
@@ -132,150 +114,141 @@
       transform: scale(1.06);
     }
   }
+}
 
-  // ========================================
-  // Mobile & Tablet Editorial Variations
-  // ========================================
-  @media (max-width: $bp-tablet) {
-    min-height: auto;
+// ----------------------------------------
+// Responsive Tablet Styles (2-Column Grid)
+// ----------------------------------------
+@media (max-width: $bp-desktop) and (min-width: 481px) {
+  .intl-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 
-    .intl-image {
-      position: relative;
-      height: 220px;
-      width: 100%;
+    .mag-0, .mag-3, .mag-8 {
+      grid-column: span 2 !important;
+      min-height: 280px;
     }
 
-    .intl-info {
-      padding: 24px;
-      background: #ffffff;
-      
-      h3 {
-        color: $text-dark;
-        font-size: 22px;
+    // Split Row Layouts for 2-column spanned cards
+    .mag-3 {
+      flex-direction: row;
+      align-items: stretch;
+
+      .intl-image {
+        position: relative;
+        width: 45%;
+        height: auto;
+        .intl-overlay { display: none; }
       }
-      p {
-        color: $text-muted;
+      .intl-info {
+        width: 55%;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+
+        h3 { color: $text-dark; }
+        p { color: $text-muted; }
+        .intl-price { background: rgba($primary-green, 0.1); color: $primary-green; }
       }
-      .intl-price {
-        background: rgba($primary-green, 0.1);
-        color: $primary-green;
+    }
+
+    .mag-8 {
+      flex-direction: row-reverse;
+      align-items: stretch;
+
+      .intl-image {
+        position: relative;
+        width: 45%;
+        height: auto;
+        .intl-overlay { display: none; }
+      }
+      .intl-info {
+        width: 55%;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+
+        h3 { color: $text-dark; }
+        p { color: $text-muted; }
+        .intl-price { background: rgba($primary-green, 0.1); color: $primary-green; }
       }
     }
   }
 }
 
-@media (max-width: $bp-tablet) {
+// ----------------------------------------
+// Responsive Mobile Styles (1-Column Grid)
+// ----------------------------------------
+@media (max-width: $bp-mobile) {
   .intl-grid {
-    grid-template-columns: 1fr !important;
-    gap: 28px;
-  }
+    grid-template-columns: 1fr;
+    gap: 24px;
 
-  // 1. Cinematic Banner Cards (mag-0, mag-3, mag-5)
-  .intl-grid .mag-0, 
-  .intl-grid .mag-3, 
-  .intl-grid .mag-5 {
-    min-height: 280px;
+    .mag-0, .mag-1, .mag-2, .mag-3, .mag-4, .mag-5, .mag-6, .mag-7, .mag-8 {
+      grid-column: span 1 !important;
+      
+      // Standardize card layouts for mobile uniformity
+      flex-direction: column !important;
+      min-height: auto !important;
+      background: #ffffff !important;
+      border-radius: 16px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba($primary-green, 0.08) !important;
 
-    .intl-image {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-    }
-
-    .intl-info {
-      background: transparent;
-      padding: 32px 24px;
-
-      h3 {
-        color: $ivory;
-      }
-      p {
-        color: rgba($beige, 0.85);
-      }
-      .intl-price {
-        background: rgba($gold, 0.25);
-        color: $emerald-dark;
-      }
-    }
-  }
-
-  // 2. Image-Left Content-Right split horizontal cards (mag-2, mag-7)
-  .intl-grid .mag-2, 
-  .intl-grid .mag-7 {
-    flex-direction: row;
-    align-items: stretch;
-
-    .intl-image {
-      width: 42%;
-      height: auto;
-      min-height: 180px;
-    }
-
-    .intl-info {
-      width: 58%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-    }
-
-    @media (max-width: $bp-mobile) {
       .intl-image {
-        width: 35%;
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 10 !important;
+
+        .intl-overlay {
+          display: none !important;
+        }
+
+        img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+        }
       }
+
       .intl-info {
-        width: 65%;
-        padding: 16px;
-        h3 { font-size: 18px; }
-        p { font-size: 13px; }
+        width: 100% !important;
+        padding: 20px !important;
+        background: #ffffff !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+
+        .intl-price {
+          background: rgba($primary-green, 0.1) !important;
+          color: $primary-green !important;
+          padding: 4px 12px !important;
+          font-size: 11px !important;
+          font-weight: 600 !important;
+          border-radius: $radius-pill !important;
+          margin-bottom: 10px !important;
+          display: inline-block !important;
+        }
+
+        h3 {
+          color: $text-dark !important;
+          font-size: 22px !important;
+          margin-bottom: 6px !important;
+        }
+
+        p {
+          color: $text-muted !important;
+          font-size: 14px !important;
+          margin-bottom: 0 !important;
+          font-style: italic !important;
+        }
       }
-    }
-  }
-
-  // 3. Image-Right Content-Left split horizontal cards (mag-4, mag-8)
-  .intl-grid .mag-4, 
-  .intl-grid .mag-8 {
-    flex-direction: row-reverse;
-    align-items: stretch;
-
-    .intl-image {
-      width: 42%;
-      height: auto;
-      min-height: 180px;
-    }
-
-    .intl-info {
-      width: 58%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-    }
-
-    @media (max-width: $bp-mobile) {
-      .intl-image {
-        width: 35%;
-      }
-      .intl-info {
-        width: 65%;
-        padding: 16px;
-        h3 { font-size: 18px; }
-        p { font-size: 13px; }
-      }
-    }
-  }
-
-  // 4. Image-Top Editorial standard cards (mag-1, mag-6)
-  .intl-grid .mag-1, 
-  .intl-grid .mag-6 {
-    flex-direction: column;
-
-    .intl-image {
-      height: 200px;
-    }
-
-    .intl-info {
-      padding: 20px;
     }
   }
 }

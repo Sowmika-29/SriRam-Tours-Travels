@@ -9,7 +9,6 @@
   position: relative;
   overflow: hidden;
 
-
   .drop-word {
     display: inline-block;
     opacity: 0;
@@ -26,30 +25,23 @@
   }
 }
 
-// Mixed layout grid
+// ----------------------------------------
+// Grid Layout (Desktop Default: 3 Columns)
+// ----------------------------------------
 .dest-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 
-  // Banner cards span full width
+  // Banner cards span 2 columns
   .pos-0, .pos-3, .pos-4 {
     grid-column: span 2;
-
-    @media (max-width: $bp-tablet) {
-      grid-column: span 1;
-    }
-  }
-
-  @media (max-width: $bp-desktop) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $bp-mobile) {
-    grid-template-columns: 1fr;
   }
 }
 
+// ----------------------------------------
+// Card Base Style (Desktop Cinematic Overlay)
+// ----------------------------------------
 .dest-card {
   position: relative;
   border-radius: $radius-card;
@@ -68,6 +60,7 @@
   .dest-image {
     position: absolute;
     inset: 0;
+    transition: all 0.4s ease;
 
     img {
       width: 100%;
@@ -87,6 +80,7 @@
     position: relative;
     z-index: 2;
     padding: 32px;
+    transition: all 0.3s ease;
 
     h3 {
       font-size: 28px;
@@ -113,143 +107,138 @@
       transform: scale(1.06);
     }
   }
+}
 
-  // ========================================
-  // Mobile & Tablet Editorial Variations
-  // ========================================
-  @media (max-width: $bp-tablet) {
-    min-height: auto;
+// ----------------------------------------
+// Responsive Tablet Styles (2-Column Grid)
+// ----------------------------------------
+@media (max-width: $bp-desktop) and (min-width: 481px) {
+  .dest-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 
-    .dest-image {
-      position: relative;
-      height: 220px;
-      width: 100%;
+    .pos-0, .pos-3, .pos-4 {
+      grid-column: span 2;
     }
 
-    .dest-info {
-      padding: 24px;
-      background: #ffffff;
-      
-      h3 {
-        color: $text-dark;
-        font-size: 22px;
+    // Split Row Layouts for 2-column spanned cards
+    .pos-3 {
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 280px;
+
+      .dest-image {
+        position: relative;
+        width: 45%;
+        height: auto;
+        
+        .dest-overlay { display: none; }
       }
-      .dest-tagline {
-        color: $text-muted;
+      .dest-info {
+        width: 55%;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+
+        h3 { color: $text-dark; }
+        .dest-tagline { color: $text-muted; }
+      }
+    }
+
+    .pos-4 {
+      flex-direction: row-reverse;
+      align-items: stretch;
+      min-height: 280px;
+
+      .dest-image {
+        position: relative;
+        width: 45%;
+        height: auto;
+
+        .dest-overlay { display: none; }
+      }
+      .dest-info {
+        width: 55%;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+
+        h3 { color: $text-dark; }
+        .dest-tagline { color: $text-muted; }
       }
     }
   }
 }
 
-@media (max-width: $bp-tablet) {
-  // Forces 1-column layout on tablet/mobile so we can apply custom row layouts
+// ----------------------------------------
+// Responsive Mobile Styles (1-Column Grid)
+// ----------------------------------------
+@media (max-width: $bp-mobile) {
   .dest-grid {
-    grid-template-columns: 1fr !important;
-    gap: 28px;
-  }
+    grid-template-columns: 1fr;
+    gap: 24px;
 
-  // 1. Cinematic Banner Cards (pos-0, pos-3, pos-4, pos-8)
-  .dest-grid .pos-0, 
-  .dest-grid .pos-3, 
-  .dest-grid .pos-4, 
-  .dest-grid .pos-8 {
-    min-height: 280px;
+    .pos-0, .pos-1, .pos-2, .pos-3, .pos-4, .pos-5, .pos-6, .pos-7, .pos-8 {
+      grid-column: span 1 !important;
+      
+      // Standardize card layouts for mobile uniformity
+      flex-direction: column !important;
+      min-height: auto !important;
+      background: #ffffff !important;
+      border-radius: 16px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba($primary-green, 0.08) !important;
 
-    .dest-image {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-    }
-
-    .dest-info {
-      background: transparent;
-      padding: 32px 24px;
-
-      h3 {
-        color: $ivory;
-      }
-      .dest-tagline {
-        color: rgba($beige, 0.85);
-      }
-    }
-  }
-
-  // 2. Image-Left Content-Right split horizontal cards (pos-2, pos-7)
-  .dest-grid .pos-2, 
-  .dest-grid .pos-7 {
-    flex-direction: row;
-    align-items: stretch;
-
-    .dest-image {
-      width: 42%;
-      height: auto;
-      min-height: 180px;
-    }
-
-    .dest-info {
-      width: 58%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-    }
-
-    @media (max-width: $bp-mobile) {
       .dest-image {
-        width: 35%;
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 10 !important;
+
+        .dest-overlay {
+          display: none !important;
+        }
+
+        img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+        }
       }
+
       .dest-info {
-        width: 65%;
-        padding: 16px;
-        h3 { font-size: 18px; }
-        .dest-tagline { font-size: 13px; }
+        width: 100% !important;
+        padding: 20px !important;
+        background: #ffffff !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+
+        h3 {
+          color: $text-dark !important;
+          font-size: 22px !important;
+          margin-bottom: 6px !important;
+        }
+
+        .dest-tagline {
+          color: $text-muted !important;
+          font-size: 14px !important;
+          margin-bottom: 16px !important;
+          font-style: italic !important;
+        }
+
+        .btn {
+          padding: 10px 20px !important;
+          font-size: 13px !important;
+          align-self: flex-start !important;
+          width: auto !important;
+        }
       }
-    }
-  }
-
-  // 3. Image-Right Content-Left split horizontal cards (pos-5)
-  .dest-grid .pos-5 {
-    flex-direction: row-reverse;
-    align-items: stretch;
-
-    .dest-image {
-      width: 42%;
-      height: auto;
-      min-height: 180px;
-    }
-
-    .dest-info {
-      width: 58%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-    }
-
-    @media (max-width: $bp-mobile) {
-      .dest-image {
-        width: 35%;
-      }
-      .dest-info {
-        width: 65%;
-        padding: 16px;
-        h3 { font-size: 18px; }
-        .dest-tagline { font-size: 13px; }
-      }
-    }
-  }
-
-  // 4. Image-Top Editorial standard cards (pos-1, pos-6)
-  .dest-grid .pos-1, 
-  .dest-grid .pos-6 {
-    flex-direction: column;
-
-    .dest-image {
-      height: 200px;
-    }
-
-    .dest-info {
-      padding: 20px;
     }
   }
 }
