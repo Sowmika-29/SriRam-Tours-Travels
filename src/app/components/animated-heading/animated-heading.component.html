@@ -4,28 +4,94 @@
   }
   
   <div class="anim1-wrap">
-    <!-- Inline SVG Bus -->
-    <svg class="bus-svg" 
-         [class.drive]="status === 'drive'" 
-         [class.park]="status === 'park'" 
-         [style.--bus-end]="busEndPx + 'px'" 
-         viewBox="0 0 100 50">
-      <!-- Bus body -->
-      <rect x="2" y="10" width="88" height="28" rx="6" class="bus-body" />
-      <!-- Windshield -->
-      <path d="M78 12 h10 a2 2 0 0 1 2 2 v10 h-12 z" class="bus-glass" />
-      <!-- Windows -->
-      <rect x="12" y="14" width="10" height="8" rx="1" class="bus-window" />
-      <rect x="25" y="14" width="10" height="8" rx="1" class="bus-window" />
-      <rect x="38" y="14" width="10" height="8" rx="1" class="bus-window" />
-      <rect x="51" y="14" width="10" height="8" rx="1" class="bus-window" />
-      <rect x="64" y="14" width="10" height="8" rx="1" class="bus-window" />
-      <!-- Wheels -->
-      <circle cx="24" cy="38" r="6" class="bus-wheel" />
-      <circle cx="68" cy="38" r="6" class="bus-wheel" />
-      <!-- Decorative Stripe -->
-      <line x1="2" y1="28" x2="88" y2="28" class="bus-stripe" />
-    </svg>
+    <!-- Inline SVG Vehicle (Bus or Car) -->
+    @if (vehicle === 'car') {
+      <svg class="bus-svg car-svg" 
+           [class.drive]="status === 'drive'" 
+           [class.park]="status === 'park'" 
+           [style.--bus-end]="busEndPx + 'px'" 
+           viewBox="0 0 100 50">
+        <!-- Car body -->
+        <path d="M 5 30 C 12 28, 16 26, 22 20 L 36 14 L 68 14 L 78 24 L 92 26 L 95 31 L 95 38 L 84 38 A 8 8 0 0 0 68 38 L 38 38 A 8 8 0 0 0 22 38 L 5 38 Z" class="bus-body" />
+        <!-- Car windows -->
+        <path d="M 38 17 L 50 17 L 50 23 L 26 23 Z" class="bus-window" />
+        <path d="M 52 17 L 66 17 L 73 23 L 52 23 Z" class="bus-window" />
+        <!-- Wheels -->
+        <circle cx="30" cy="38" r="6" class="bus-wheel" />
+        <circle cx="76" cy="38" r="6" class="bus-wheel" />
+        <!-- Side trim stripe -->
+        <line x1="5" y1="30" x2="95" y2="30" class="bus-stripe" />
+      </svg>
+    } @else if (vehicle === 'bike') {
+      <svg class="bus-svg bike-svg" 
+           [class.drive]="status === 'drive'" 
+           [class.park]="status === 'park'" 
+           [style.--bus-end]="busEndPx + 'px'" 
+           viewBox="0 0 100 50">
+        <!-- Main body (Fairing, tank, seat, tail cowl, engine underbelly) -->
+        <path d="M 24 36 L 38 36 L 36 28 L 18 20 L 26 20 L 32 26 C 36 22, 40 18, 45 18 C 49 18, 52 20, 56 21 L 58 17 M 58 17 L 54 15 M 56 21 L 62 14 L 76 28 L 66 28 L 55 39 L 38 39 Z" class="bus-body" />
+        <!-- Fairing horizontal stripes -->
+        <line x1="52" y1="24" x2="64" y2="24" class="bus-stripe" />
+        <line x1="55" y1="26" x2="62" y2="26" class="bus-stripe" />
+        <!-- Underbelly diagonal stripe -->
+        <line x1="48" y1="39" x2="58" y2="29" class="bus-stripe" />
+        <!-- Rear Swingarm Triangle -->
+        <path d="M 24 36 L 36 28 L 36 36 Z" class="bus-window" />
+        <!-- Rear Wheel -->
+        <circle cx="24" cy="36" r="8" class="bus-wheel" style="stroke-width: 2px;" />
+        <circle cx="24" cy="36" r="4" class="bus-window" />
+        <!-- Front Wheel -->
+        <circle cx="76" cy="36" r="8" class="bus-wheel" style="stroke-width: 2px;" />
+        <circle cx="76" cy="36" r="4" class="bus-window" />
+        <!-- Front fork line -->
+        <line x1="72" y1="24" x2="79" y2="40" class="bus-stripe" style="stroke-width: 1.5px;" />
+      </svg>
+    } @else if (vehicle === 'plane') {
+      <svg class="bus-svg plane-svg" 
+           [class.drive]="status === 'drive'" 
+           [class.park]="status === 'park'" 
+           [style.--bus-end]="busEndPx + 'px'" 
+           viewBox="0 0 100 50">
+        <!-- Background wing (top-left) -->
+        <path d="M 35 18 L 25 2 L 38 2 L 55 18 Z" class="bus-window" />
+        <!-- Main body (fuselage + tail fin) -->
+        <path d="M 90 24 C 94 22, 90 17, 80 17 C 72 17, 54 20, 35 24 L 15 10 L 11 10 L 17 25 L 12 36 L 18 36 L 24 28 C 45 29, 65 29, 82 28 C 86 28, 88 26, 90 24 Z" class="bus-body" />
+        <!-- Foreground wing (bottom-left) -->
+        <path d="M 45 26 L 28 48 L 42 48 L 65 26 Z" class="bus-body" />
+        <!-- Cockpit Window -->
+        <path d="M 78 18 L 84 20 L 82 23 L 76 21 Z" class="bus-window" />
+        <!-- Windows (5 dots) -->
+        <circle cx="40" cy="23" r="1.5" class="bus-stripe" />
+        <circle cx="48" cy="22.5" r="1.5" class="bus-stripe" />
+        <circle cx="56" cy="22" r="1.5" class="bus-stripe" />
+        <circle cx="64" cy="21.5" r="1.5" class="bus-stripe" />
+        <circle cx="72" cy="21" r="1.5" class="bus-stripe" />
+        <!-- Side detail line -->
+        <path d="M 50 25 L 85 25" class="bus-stripe" />
+      </svg>
+    } @else {
+      <svg class="bus-svg" 
+           [class.drive]="status === 'drive'" 
+           [class.park]="status === 'park'" 
+           [style.--bus-end]="busEndPx + 'px'" 
+           viewBox="0 0 100 50">
+        <!-- Bus body -->
+        <rect x="2" y="10" width="88" height="28" rx="6" class="bus-body" />
+        <!-- Windshield -->
+        <path d="M78 12 h10 a2 2 0 0 1 2 2 v10 h-12 z" class="bus-glass" />
+        <!-- Windows -->
+        <rect x="12" y="14" width="10" height="8" rx="1" class="bus-window" />
+        <rect x="25" y="14" width="10" height="8" rx="1" class="bus-window" />
+        <rect x="38" y="14" width="10" height="8" rx="1" class="bus-window" />
+        <rect x="51" y="14" width="10" height="8" rx="1" class="bus-window" />
+        <rect x="64" y="14" width="10" height="8" rx="1" class="bus-window" />
+        <!-- Wheels -->
+        <circle cx="24" cy="38" r="6" class="bus-wheel" />
+        <circle cx="68" cy="38" r="6" class="bus-wheel" />
+        <!-- Decorative Stripe -->
+        <line x1="2" y1="28" x2="88" y2="28" class="bus-stripe" />
+      </svg>
+    }
 
     <!-- Heading letters -->
     <h2 class="anim1-heading" #headingEl>

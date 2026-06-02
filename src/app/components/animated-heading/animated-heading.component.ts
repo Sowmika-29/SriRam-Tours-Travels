@@ -17,6 +17,7 @@ export class AnimatedHeadingComponent implements OnInit, AfterViewInit {
   @Input() text: string = '';
   @Input() theme: 'light' | 'dark' = 'light';
   @Input() subtitle: string = '';
+  @Input() vehicle: 'bus' | 'car' | 'bike' | 'plane' = 'bus';
 
   @ViewChild('headingEl') headingEl!: ElementRef;
   @ViewChild('containerEl') containerEl!: ElementRef;

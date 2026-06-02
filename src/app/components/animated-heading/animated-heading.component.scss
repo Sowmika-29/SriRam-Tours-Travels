@@ -90,6 +90,18 @@
   }
 }
 
+.bus-svg.plane-svg {
+  width: 90px;
+  height: 50px;
+  margin-top: -4px;
+}
+
+.bus-svg.bike-svg {
+  width: 80px;
+  height: 48px;
+  margin-top: -4px;
+}
+
 .bus-svg.drive {
   animation: busRoll 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }

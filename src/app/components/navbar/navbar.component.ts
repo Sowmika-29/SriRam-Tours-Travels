@@ -10,7 +10,9 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   isScrolled = signal(false);
+  isHidden = signal(false);
   isMobileMenuOpen = signal(false);
+  private lastScrollY = 0;
 
   navLinks = [
     { label: 'Home', href: '/' },
@@ -24,7 +26,19 @@ export class NavbarComponent {
 
   @HostListener('window:scroll')
   onScroll(): void {
-    this.isScrolled.set(window.scrollY > 60);
+    const currentScrollY = window.scrollY;
+    
+    // Scrolled status (threshold 60px)
+    this.isScrolled.set(currentScrollY > 60);
+    
+    // Auto-hide on scroll down, show on scroll up
+    if (currentScrollY > 120 && currentScrollY > this.lastScrollY && !this.isMobileMenuOpen()) {
+      this.isHidden.set(true);
+    } else {
+      this.isHidden.set(false);
+    }
+    
+    this.lastScrollY = currentScrollY;
   }
 
   toggleMobileMenu(): void {
@@ -37,3 +51,4 @@ export class NavbarComponent {
     document.body.style.overflow = '';
   }
 }
+

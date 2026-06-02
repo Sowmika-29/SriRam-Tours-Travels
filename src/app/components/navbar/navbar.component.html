@@ -1,4 +1,4 @@
-<nav class="navbar" [class.scrolled]="isScrolled()" id="navbar">
+<nav class="navbar" [class.scrolled]="isScrolled()" [class.hidden]="isHidden()" id="navbar">
   <div class="navbar-inner">
     <!-- Logo -->
     <a routerLink="/" class="logo" (click)="closeMobileMenu()">
