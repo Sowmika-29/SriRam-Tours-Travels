@@ -10,6 +10,32 @@
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
   animation: navSlideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 
+  // Liquid Gold Shimmering Bottom Border
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $gold, #ffffff, $gold, transparent);
+    background-size: 200% 100%;
+    animation: goldShimmer 3s linear infinite;
+    pointer-events: none;
+  }
+
+  // Metallic Light Sweep Background
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba($gold, 0.04) 45%, rgba(#ffffff, 0.1) 50%, rgba($gold, 0.04) 55%, transparent 70%);
+    background-size: 200% 100%;
+    animation: goldShimmer 6s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
   &.scrolled {
     background: rgba($emerald-dark, 0.95);
     backdrop-filter: blur(20px);
@@ -21,6 +47,53 @@
 
   &.hidden {
     transform: translateY(-100%) !important;
+  }
+}
+
+// Sparkle Overlay Container
+.sparkle-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #ffffff 0%, rgba($gold, 0.8) 50%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffffff, 0 0 10px $gold;
+  animation: floatSparkle 4s infinite ease-in-out;
+  opacity: 0;
+
+  &.s1 { top: 20%; left: 15%; animation-delay: 0s; animation-duration: 3s; }
+  &.s2 { top: 60%; left: 40%; animation-delay: 1s; animation-duration: 5s; }
+  &.s3 { top: 30%; left: 70%; animation-delay: 0.5s; animation-duration: 4s; }
+  &.s4 { top: 75%; left: 85%; animation-delay: 2s; animation-duration: 6s; }
+  &.s5 { top: 15%; left: 55%; animation-delay: 1.5s; animation-duration: 3.5s; }
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes floatSparkle {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(15px, -5px) scale(1.2);
+  }
+  100% {
+    transform: translate(30px, -10px) scale(0.5);
+    opacity: 0;
   }
 }
 
@@ -77,6 +150,22 @@
     font-weight: 700;
     color: $cream;
     letter-spacing: 1px;
+    animation: subtleGlowGlitch 6s infinite alternate;
+  }
+
+  @keyframes subtleGlowGlitch {
+    0%, 90%, 94%, 98%, 100% {
+      text-shadow: 0 0 4px rgba($gold, 0.4);
+      transform: skewX(0);
+    }
+    92% {
+      text-shadow: -2px 0 8px rgba($gold, 0.8), 2px 0 8px rgba(#ffffff, 0.8);
+      transform: skewX(-2deg);
+    }
+    96% {
+      text-shadow: 2px 0 8px rgba($gold, 0.8), -2px 0 8px rgba(#ffffff, 0.8);
+      transform: skewX(2deg);
+    }
   }
 
   .logo-sub {
