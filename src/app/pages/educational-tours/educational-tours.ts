@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { WhatsappService } from '../../services/whatsapp.service';
 import { AnimatedHeadingComponent } from '../../components/animated-heading/animated-heading.component';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
@@ -31,8 +32,16 @@ export class EducationalToursPage implements OnInit {
   selectedPackage: TourPackage | null = null;
 
   private route = inject(ActivatedRoute);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
   ngOnInit() {
+    this.title.setTitle('Educational Trips & College Tours in Karur | SRI RAM');
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Safe & educational school tours and college excursions from Karur. Multi-day and single-day packages with custom itineraries.'
+    });
+
     this.route.queryParams.subscribe(params => {
       if (params['category']) {
         const cat = params['category'];
@@ -42,6 +51,7 @@ export class EducationalToursPage implements OnInit {
       }
     });
   }
+
 
   // Form Fields
   enquiryForm = {
