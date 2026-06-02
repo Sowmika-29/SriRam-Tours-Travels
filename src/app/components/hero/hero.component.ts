@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { WhatsappService } from '../../services/whatsapp.service';
 
 @Component({
@@ -16,6 +16,15 @@ export class HeroComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initParticles();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const scrollY = window.scrollY;
+    // Only update within/near hero section to optimize scroll performance
+    if (scrollY <= window.innerHeight) {
+      document.documentElement.style.setProperty('--scroll-y', scrollY.toString());
+    }
   }
 
   scrollToDestinations(): void {
@@ -52,6 +61,9 @@ export class HeroComponent implements OnInit, AfterViewInit {
       speedY: number;
       opacity: number;
       color: string;
+      angle: number;
+      angleSpeed: number;
+      swayRange: number;
     }
 
     const particles: Particle[] = [];
@@ -62,10 +74,13 @@ export class HeroComponent implements OnInit, AfterViewInit {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 2 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.2,
-        speedY: (Math.random() - 0.5) * 0.1,
+        speedX: (Math.random() - 0.5) * 0.1,
+        speedY: -(Math.random() * 0.2 + 0.05), // Slowly drift upwards
         opacity: Math.random() * 0.25 + 0.05,
-        color: Math.random() > 0.5 ? '#c7b793' : '#f8f8e2' // Warm Sand/Gold & Cream matching the new palette
+        color: Math.random() > 0.5 ? '#c7b793' : '#f8f8e2', // Warm Sand/Gold & Cream matching the new palette
+        angle: Math.random() * Math.PI * 2,
+        angleSpeed: Math.random() * 0.01 + 0.005,
+        swayRange: Math.random() * 0.4 + 0.1
       });
     }
 
@@ -79,11 +94,18 @@ export class HeroComponent implements OnInit, AfterViewInit {
         ctx.globalAlpha = p.opacity;
         ctx.fill();
 
-        p.x += p.speedX;
+        // Organic gentle floating
+        p.angle += p.angleSpeed;
         p.y += p.speedY;
+        p.x += p.speedX + Math.sin(p.angle) * p.swayRange;
 
-        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+        // Wrap around borders rather than hard bounce for organic flow
+        if (p.y < -10) {
+          p.y = canvas.height + 10;
+          p.x = Math.random() * canvas.width;
+        }
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
       });
 
       ctx.globalAlpha = 1;
