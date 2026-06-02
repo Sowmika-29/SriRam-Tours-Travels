@@ -21,6 +21,12 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  @media (max-width: $bp-tablet) {
+    padding: 20px 16px;
+    gap: 16px;
+    border-radius: 16px;
+  }
 }
 
 .search-box {
@@ -29,6 +35,10 @@
   max-width: 500px;
   display: flex;
   align-items: center;
+
+  @media (max-width: $bp-tablet) {
+    max-width: 100%;
+  }
 
   .search-icon {
     position: absolute;
@@ -63,6 +73,19 @@
   flex-wrap: wrap;
   gap: 12px;
 
+  @media (max-width: $bp-tablet) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    padding: 4px 0 8px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; // Firefox
+    
+    &::-webkit-scrollbar {
+      display: none; // Safari and Chrome
+    }
+  }
+
   .tab-btn {
     padding: 12px 24px;
     font-size: 14px;
@@ -74,6 +97,13 @@
     color: $text-muted;
     cursor: pointer;
     transition: $transition-base;
+
+    @media (max-width: $bp-tablet) {
+      flex-shrink: 0;
+      white-space: nowrap;
+      padding: 10px 20px;
+      font-size: 13.5px;
+    }
 
     &:hover {
       background: rgba($sage, 0.2);

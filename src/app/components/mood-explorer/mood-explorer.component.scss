@@ -47,24 +47,14 @@
   cursor: pointer;
   height: 100%; // Default to grid row fill on desktop
 
-  // Tablet Staggered Layout
+  // Tablet Layout - Uniform height to prevent gaps in 2-column grid
   @media (max-width: $bp-desktop) {
-    &.tile-0 { height: 320px; }
-    &.tile-1 { height: 250px; }
-    &.tile-2 { height: 250px; }
-    &.tile-3 { height: 320px; }
-    &.tile-4 { height: 280px; }
-    &.tile-5 { height: 280px; }
+    height: 260px;
   }
 
-  // Mobile Staggered Layout
+  // Mobile Layout - Uniform height for clean vertical list or 2-column grid
   @media (max-width: $bp-mobile) {
-    &.tile-0 { height: 290px; }
-    &.tile-1 { height: 180px; }
-    &.tile-2 { height: 250px; }
-    &.tile-3 { height: 180px; }
-    &.tile-4 { height: 290px; }
-    &.tile-5 { height: 220px; }
+    height: 200px;
   }
 
   img {
