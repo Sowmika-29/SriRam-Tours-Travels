@@ -8,6 +8,7 @@ import { TestimonialsComponent } from '../../components/testimonials/testimonial
 import { CtaBannerComponent } from '../../components/cta-banner/cta-banner.component';
 import { EducationalToursFeaturedComponent } from '../../components/educational-tours-featured/educational-tours-featured';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
