@@ -1,7 +1,11 @@
 @use '../../../styles/variables' as *;
 
 .edu-packages-section {
-  background: $ivory;
+  background: radial-gradient(circle at center, rgba(11, 22, 20, 0.88) 0%, rgba(6, 12, 11, 0.98) 100%) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 2;
 }
 
 // Search and Filter Controls
@@ -119,251 +123,316 @@
   }
 }
 
-// Packages Grid
-.packages-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-
-  @media (min-width: $bp-tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: $bp-desktop) {
-    grid-template-columns: repeat(3, 1fr);
+// Category Header & Dividers
+.category-lane-section {
+  margin-bottom: 80px;
+  
+  &:last-child {
+    margin-bottom: 40px;
   }
 }
 
-// Package Card
-.package-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border-radius: $radius-card;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: $shadow-card;
-  transition: $transition-spring;
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba($emerald-dark, 0.15);
-    border-color: rgba($gold, 0.6);
-
-    .card-image-wrapper img {
-      transform: scale(1.08);
-    }
-  }
-}
-
-.card-image-wrapper {
-  position: relative;
-  height: 180px;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: $transition-slow;
-  }
-
-  .card-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%);
-  }
-
-  .category-badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: $gold;
-    color: $text-dark;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: $radius-pill;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-}
-
-.card-content {
-  padding: 24px 20px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-
-  .package-subtitle {
-    font-size: 13px;
-    font-weight: 600;
-    color: $emerald;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .package-title {
+.category-header {
+  margin-bottom: 30px;
+  
+  .category-title {
     font-family: $font-heading;
     font-size: 26px;
-    color: $text-dark;
-    margin-bottom: 12px;
-    line-height: 1.2;
-  }
-
-  .package-summary {
-    font-size: 14px;
-    color: $text-muted;
-    line-height: 1.5;
-    margin-bottom: 12px;
-    flex-grow: 1;
-
-    &.clamped {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin-bottom: 8px;
-    }
-  }
-}
-
-.expand-toggle-wrapper {
-  margin-bottom: 16px;
-}
-
-.btn-text-gold {
-  background: none;
-  border: none;
-  color: $emerald;
-  font-weight: 600;
-  font-size: 13.5px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 0;
-  font-family: $font-body;
-  transition: color 0.3s;
-
-  &:hover {
-    color: $gold;
-  }
-
-  .chevron-icon {
-    transition: transform 0.3s ease;
-  }
-}
-
-.key-attractions {
-  margin-bottom: 20px;
-  border-top: 1px solid rgba($primary-green, 0.1);
-  padding-top: 12px;
-  animation: fadeInAttr 0.4s ease forwards;
-
-  strong {
-    font-size: 14px;
-    color: $text-dark;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .attractions-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .attr-tag {
-    background: rgba($primary-green, 0.06);
-    border: 1px solid rgba($primary-green, 0.12);
-    color: $text-dark;
-    padding: 4px 10px;
-    font-size: 13px;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
     font-weight: 500;
+    color: $ivory;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
 
-    .check-icon {
-      color: $emerald;
-      flex-shrink: 0;
+    @media (max-width: 767px) {
+      font-size: 19px;
+    }
+
+    .category-indicator-arrow {
+      font-family: $font-body;
+      font-size: 12px;
+      font-weight: 600;
+      color: $gold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      opacity: 0.85;
+      
+      @media (min-width: 768px) {
+        display: none; // Only show scrolling horizontal hints on mobile
+      }
+    }
+  }
+
+  .category-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, rgba($gold, 0.45) 0%, rgba(255, 255, 255, 0.08) 100%);
+  }
+}
+
+// Interconnected Honeycomb (Hexagon) Grid Layout
+.honeycomb-grid-container {
+  padding: 30px 0;
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+}
+
+.honeycomb-grid {
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  
+  // Desktop Placement (3 columns, staggered center column, NO OVERLAP)
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 280px);
+    gap: 15px 20px; // Tight vertical and horizontal gaps
+    width: max-content;
+    padding-bottom: 120px; // Adjusted for tighter shift
+  }
+
+  // Tablet Placement (3 columns, staggered center column, NO OVERLAP)
+  @media (min-width: 768px) and (max-width: 1023px) {
+    grid-template-columns: repeat(3, 210px);
+    gap: 10px 15px;
+    width: max-content;
+    padding-bottom: 90px;
+  }
+
+  // Mobile Horizontal Scroll Lane
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 15px; // Tighter gap on mobile horizontal lanes
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 15px 24px 30px 24px;
+    
+    // Hide scrollbar Firefox
+    scrollbar-width: none;
+    // Hide scrollbar IE/Edge
+    -ms-overflow-style: none;
+    // Hide scrollbar Chrome/Safari
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 }
 
-@keyframes fadeInAttr {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+// Honeycomb Card Wrapper
+.honeycomb-card-wrapper {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.5));
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              filter 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+              background 0.6s ease,
+              opacity 0.6s ease;
+  will-change: transform, filter, opacity;
+  z-index: 2;
+
+  // Stagger center column on Desktop (nested tightly)
+  @media (min-width: 1024px) {
+    height: 320px;
+    
+    &:nth-child(3n+2) {
+      transform: translateY(110px);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  // Stagger center column on Tablet
+  @media (min-width: 768px) and (max-width: 1023px) {
+    height: 240px;
+    
+    &:nth-child(3n+2) {
+      transform: translateY(85px);
+    }
+  }
+
+  // Desktop & Tablet Frame Styling for Hexagon Cards
+  @media (min-width: 768px) {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: linear-gradient(135deg, rgba($gold, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
+    padding: 3px; // Frame thickness
+  }
+
+  // Mobile Horizontal Scroll Lane Item Styling
+  @media (max-width: 767px) {
+    flex: 0 0 170px;
+    height: 200px;
+    scroll-snap-align: start;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: linear-gradient(135deg, rgba($gold, 0.45) 0%, rgba(255, 255, 255, 0.12) 100%);
+    padding: 2px;
+  }
+
+  // Active hover states (scale up, deep shadow, glowing border frame)
+  &:hover {
+    transform: scale(1.05) translateY(-5px);
+    filter: drop-shadow(0 20px 40px rgba($gold, 0.35));
+    z-index: 10;
+    
+    @media (min-width: 768px) {
+      background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
+    }
+    @media (max-width: 767px) {
+      background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
+    }
+
+    .hexagon-img {
+      transform: scale(1.10);
+    }
+    
+    .hexagon-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 20, 18, 0.1) 0%,
+        rgba(10, 20, 18, 0.7) 45%,
+        rgba(10, 20, 18, 1) 100%
+      );
+    }
+    
+    .hexagon-btn {
+      background: $gold;
+      color: $emerald-dark;
+      border-color: $gold;
+      box-shadow: 0 4px 15px rgba($gold, 0.3);
+    }
+  }
+
+  // Neighbor cards compress and shift down subtly
+  &.is-neighbor {
+    transform: scale(0.97) translateY(2px);
+    opacity: 0.85;
+    z-index: 1;
   }
 }
 
-.card-btn {
-  margin-top: auto;
-  background: linear-gradient(135deg, $emerald-dark 0%, $emerald 100%);
-  color: $ivory !important;
-  border: 1px solid rgba($gold, 0.2);
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: $radius-pill;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba($emerald-dark, 0.25);
-  letter-spacing: 0.5px;
+// Hexagon Tile (pointy-topped)
+.hexagon-tile {
   position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $emerald-dark;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  box-sizing: border-box;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -50%;
-    width: 200%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.25) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    transform: skewX(-25deg);
-    transition: 0.75s;
-    opacity: 0;
+.hexagon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: scale(1.02);
+  will-change: transform;
+}
+
+.hexagon-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 20, 18, 0.15) 0%,
+    rgba(10, 20, 18, 0.6) 45%,
+    rgba(10, 20, 18, 0.95) 100%
+  );
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+
+.hexagon-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 24px 45px 24px;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+  
+  @media (max-width: 767px) {
+    padding: 16px 12px 25px 12px !important;
   }
+}
 
-  &:hover {
-    transform: translateY(-3px);
-    background: linear-gradient(135deg, $emerald 0%, $emerald-dark 100%);
-    color: $gold !important;
-    border-color: $gold;
-    box-shadow: 0 8px 25px rgba($emerald, 0.4);
-
-    &::after {
-      left: 120%;
-      opacity: 1;
-    }
+.hexagon-type {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: $gold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: rgba(11, 22, 20, 0.6);
+  border: 1px solid rgba($gold, 0.35);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  
+  @media (max-width: 767px) {
+    font-size: 8px !important;
+    padding: 2px 8px !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 1px !important;
   }
+}
 
-  &:active {
-    transform: translateY(-1px);
+.hexagon-title {
+  font-family: $font-heading;
+  font-size: 21px;
+  font-weight: 400;
+  color: $ivory;
+  margin: 8px 0;
+  line-height: 1.3;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  max-width: 220px;
+  
+  @media (max-width: 767px) {
+    font-size: 14px !important;
+    margin: 4px 0 !important;
+    max-width: 140px !important;
+  }
+}
+
+.hexagon-btn {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: $ivory;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba($gold, 0.5);
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.95;
+  transition: all 0.4s ease;
+  
+  @media (max-width: 767px) {
+    margin-top: 8px !important;
+    font-size: 8px !important;
+    padding: 4px 10px !important;
+    letter-spacing: 0.5px !important;
   }
 }
 

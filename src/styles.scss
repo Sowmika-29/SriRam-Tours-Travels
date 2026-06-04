@@ -371,3 +371,138 @@ input, textarea, select {
   position: relative;
   z-index: 10;
 }
+
+// ========================================
+// Global Living Background System
+// ========================================
+.living-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: $beige; // luxury beige fallback instead of dark forest green
+}
+
+.bg-video-wrapper {
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 110%;
+  height: 150%;
+  will-change: transform;
+  // Moves slowly in response to scroll for the premium parallax depth effect
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.05px), 0);
+  pointer-events: none;
+}
+
+.bg-video-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  // Ultra-slow subtle breathing to make it feel extra immersive
+  animation: videoBreath 40s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes videoBreath {
+  0% {
+    transform: scale(1.0) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.03) translate3d(-3px, 3px, 0);
+  }
+}
+
+.living-bg-overlay {
+  position: absolute;
+  inset: 0;
+  // Soft, elegant overlay with opacity strictly between 0.15 and 0.20
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.20) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+// ========================================
+// Global Transparency & Contrast Resets
+// ========================================
+body {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+section, 
+.section-padding,
+.destination-story,
+.itinerary-section,
+.gallery-section,
+.places-covered-section,
+.about-section,
+.contact-section,
+.fleet-section,
+.page-hero {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+// Make general text elements light and high-contrast
+h1, h2, h3, h4, h5, h6 {
+  color: $ivory !important;
+}
+
+p, li, span, td, th, label, div {
+  &:not(.btn):not(.btn-gold):not(.card-btn):not(.tag):not(.category-badge):not(.day-badge):not(.node-time-badge) {
+    color: rgba($ivory, 0.85);
+  }
+}
+
+// Dark translucent adjustments for cards and boxes
+.glass-card, 
+.card,
+.feature-card,
+.why-card,
+.fleet-card,
+.story-visual-column .highlights-container {
+  background: linear-gradient(135deg, rgba(10, 25, 20, 0.7) 0%, rgba(10, 25, 20, 0.55) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35) !important;
+  
+  // Make card text light for contrast
+  h3, h4, p, li, span {
+    color: rgba($ivory, 0.95) !important;
+  }
+  .highlight-number {
+    color: $gold !important;
+  }
+}
+
+.journey-summary-box {
+  background: rgba(199, 183, 147, 0.08) !important;
+  border-left: 3px solid $gold !important;
+}
+
+// Clean text contrasts for sections
+.section-lead-text,
+.section-desc,
+.story-overview,
+.node-description {
+  color: rgba($ivory, 0.85) !important;
+}
+
+.editorial-heading {
+  color: $ivory !important;
+}
+
+.node-title {
+  color: $gold !important;
+}
+

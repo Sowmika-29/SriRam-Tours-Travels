@@ -7,6 +7,7 @@ import { ServicesPage } from './pages/services-page/services-page';
 import { AboutPage } from './pages/about-page/about-page';
 import { ContactPage } from './pages/contact-page/contact-page';
 import { EducationalToursPage } from './pages/educational-tours/educational-tours';
+import { EducationalTourDetailComponent } from './pages/educational-tour-detail/educational-tour-detail';
 
 export const routes: Routes = [
   { path: '', component: Home, data: { animation: 'HomePage' } },
@@ -15,6 +16,9 @@ export const routes: Routes = [
   { path: 'fleet', component: FleetPage, data: { animation: 'FleetPage' } },
   { path: 'services', component: ServicesPage, data: { animation: 'ServicesPage' } },
   { path: 'educational-tours', component: EducationalToursPage, data: { animation: 'EducationalToursPage' } },
+  { path: 'educational-tours/:type/:slug', component: EducationalTourDetailComponent, data: { animation: 'EducationalTourDetailPage' } },
+  { path: 'school-tours/:slug', component: EducationalTourDetailComponent, data: { animation: 'EducationalTourDetailPage' } },
+  { path: 'college-tours/:slug', component: EducationalTourDetailComponent, data: { animation: 'EducationalTourDetailPage' } },
   { path: 'about', component: AboutPage, data: { animation: 'AboutPage' } },
   { path: 'contact', component: ContactPage, data: { animation: 'ContactPage' } },
   { path: '**', redirectTo: '' }

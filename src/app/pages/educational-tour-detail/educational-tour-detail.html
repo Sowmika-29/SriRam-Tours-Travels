@@ -1,0 +1,253 @@
+@if (package) {
+  <!-- Floating Back Button -->
+  <a routerLink="/educational-tours" class="floating-back-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="back-icon">
+      <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+    </svg>
+    <span>Back to Tours</span>
+  </a>
+
+  <!-- Cinematic Fullscreen Background -->
+  <div class="detail-fullscreen-bg">
+    <img [src]="package.image" [alt]="package.title" class="bg-image zoom-effect">
+    <div class="bg-overlay"></div>
+    
+    <!-- Atmospheric effects -->
+    <div class="floating-mist"></div>
+    <div class="light-rays"></div>
+    <div class="particles-effect"></div>
+  </div>
+
+  <!-- Cinematic Fullscreen Hero -->
+  <header class="detail-hero">
+    <div class="hero-content-wrapper">
+      <div class="container text-center">
+        <span class="category-badge scroll-reveal-fade-up">{{ package.category }}</span>
+        <h1 class="destination-title scroll-reveal-fade-up">{{ package.title }}</h1>
+        <p class="destination-subtitle scroll-reveal-fade-up">{{ package.subtitle }}</p>
+        
+        <div class="hero-actions scroll-reveal-fade-up justify-content-center">
+          <button (click)="getPackageDetails()" class="btn btn-outline-white btn-large">
+            Get Package Details
+          </button>
+          <button (click)="requestQuote()" class="btn btn-gold btn-large">
+            Request Quote
+          </button>
+          <button (click)="planThisTrip()" class="btn btn-outline-white btn-large">
+            Plan This Trip
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <div class="scroll-indicator-down">
+      <span>EXPLORE TOUR</span>
+      <div class="chevron-scroller"></div>
+    </div>
+  </header>
+
+  <!-- Premium Glassmorphic Details Section -->
+  <section class="destination-detail-section section-padding">
+    <div class="container">
+      
+      <!-- Content Grid inside Glassmorphism card -->
+      <div class="detail-glass-card glass-card scroll-reveal" scrollReveal>
+        
+        <!-- Grid for overview & journey essence -->
+        <div class="overview-grid">
+          <div class="overview-left" scrollReveal>
+            <span class="gold-subtitle">THE EXPEDITION</span>
+            <h2 class="editorial-heading">Discover the Spirit of {{ package.title }}</h2>
+            <p class="story-overview">{{ package.overview }}</p>
+          </div>
+          
+          <div class="overview-right" scrollReveal [revealDelay]="100">
+            <div class="journey-essence-box">
+              <h4>JOURNEY ESSENCE</h4>
+              <p>{{ package.journeySummary }}</p>
+            </div>
+            
+            <div class="pricing-cta-card">
+              <span class="price-header">Plan Your Trip</span>
+              <p class="price-desc">Custom plans, accommodation grades, safety protocols & student itinerary options.</p>
+              <button (click)="requestQuote()" class="btn btn-gold w-100 margin-bottom-small">
+                Request Quote
+              </button>
+              <button (click)="getPackageDetails()" class="btn btn-outline-white w-100">
+                Get Package Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience Highlights -->
+        <div class="detail-highlights-section" scrollReveal>
+          <span class="gold-subtitle">EXPERIENCES</span>
+          <h3 class="subsection-title">Trip Highlights</h3>
+          <div class="highlights-grid">
+            @for (highlight of package.highlights; track highlight; let i = $index) {
+              <div class="highlight-card" scrollReveal [revealDelay]="i * 50">
+                <span class="highlight-number">0{{ i + 1 }}</span>
+                <p class="highlight-text">{{ highlight }}</p>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Places Covered -->
+        <div class="detail-places-section" scrollReveal>
+          <span class="gold-subtitle">CURRICULUM MAPPING</span>
+          <h3 class="subsection-title">Places Covered & Key Attractions</h3>
+          <div class="places-grid">
+            @for (attr of package.keyAttractions; track attr; let i = $index) {
+              <div class="attraction-card" scrollReveal [revealDelay]="i * 40">
+                <div class="attraction-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <h4>{{ attr }}</h4>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Complete Day-by-Day Itinerary -->
+        <div class="detail-itinerary-section" scrollReveal>
+          <span class="gold-subtitle">TIMELINE</span>
+          <h3 class="subsection-title">Complete Itinerary</h3>
+          <div class="itinerary-timeline">
+            @for (day of package.itinerary; track day.dayNumber; let dayIdx = $index) {
+              <div class="itinerary-day" scrollReveal [revealDelay]="dayIdx * 80">
+                <div class="day-header">
+                  <span class="day-badge">Day {{ day.dayNumber }}</span>
+                  <h4 class="day-title">{{ day.dayTitle }}</h4>
+                </div>
+                <div class="day-slots">
+                  @for (slot of day.slots; track slot.time) {
+                    <div class="itinerary-slot">
+                      <div class="slot-time">{{ slot.time }}</div>
+                      <div class="slot-content">
+                        <h5>{{ slot.title }}</h5>
+                        <p>{{ slot.description }}</p>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Visual Gallery Section -->
+  @if (package.gallery && package.gallery.length > 0) {
+    <section class="gallery-section section-padding">
+      <div class="container text-center">
+        <span class="gold-subtitle">VISUAL GALLERY</span>
+        <h2 class="editorial-heading">Expedition Gallery</h2>
+        
+        <div class="masonry-gallery">
+          @for (img of package.gallery; track img; let i = $index) {
+            <div class="gallery-item-block" [class]="'block-size-' + (i % 3)" scrollReveal [revealDelay]="i * 50">
+              <div class="gallery-img-wrapper">
+                <img [src]="img" [alt]="package.title + ' Gallery ' + i" loading="lazy">
+                <div class="gallery-reveal-overlay"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Premium Bottom CTA & Enquiry Section -->
+  <section class="immersive-cta-section section-padding">
+    <div class="cta-bg-image" [style.background-image]="'url(' + package.image + ')'"></div>
+    <div class="cta-overlay-tint"></div>
+    
+    <div class="container cta-container" scrollReveal>
+      <span class="gold-subtitle">PLAN YOUR TOUR</span>
+      <h2 class="cta-heading">Ready to Immerse Your Students?</h2>
+      <p class="cta-desc">Connect with our trip designers. We customize itinerary plans, accommodation grades, safety protocols, and transit facilities to perfectly match your institutional standards.</p>
+      
+      <div class="cta-btn-group">
+        <button (click)="getPackageDetails()" class="btn btn-outline-white btn-large">
+          Get Package Details
+        </button>
+        <button (click)="requestQuote()" class="btn btn-gold btn-large">
+          Request Quote
+        </button>
+        <button (click)="planThisTrip()" class="btn btn-outline-white btn-large">
+          Plan This Trip
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Modal Dialog for Enquiry Form -->
+  @if (isModalOpen) {
+    <div class="modal-backdrop" (click)="closeModal()">
+      <div class="modal-container glass-card" (click)="$event.stopPropagation()">
+        <button class="modal-close-btn" (click)="closeModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+
+        <div class="modal-header">
+          <span class="gold-subtitle">INSTITUTIONAL ENQUIRY</span>
+          <h2>Request Tour Details</h2>
+          <p class="modal-selected-text">Selected Package: <strong>{{ package.title }}</strong></p>
+        </div>
+
+        <form #f="ngForm" (ngSubmit)="f.form.valid && submitEnquiry()" class="modal-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <input type="text" id="modal-pkg" [value]="package.title + ' (' + package.subtitle + ')'" readonly class="readonly-input">
+              <label for="modal-pkg" class="active-label">Package Selected</label>
+            </div>
+
+            <div class="form-group">
+              <input type="text" id="modal-name" [(ngModel)]="enquiryForm.name" name="name" required placeholder=" ">
+              <label for="modal-name">Contact Person Name</label>
+            </div>
+
+            <div class="form-group">
+              <input type="text" id="modal-institution" [(ngModel)]="enquiryForm.institutionName" name="institutionName" required placeholder=" ">
+              <label for="modal-institution">School / College Name</label>
+            </div>
+
+            <div class="form-group">
+              <input type="tel" id="modal-phone" [(ngModel)]="enquiryForm.phone" name="phone" required placeholder=" ">
+              <label for="modal-phone">Contact Number</label>
+            </div>
+
+            <div class="form-group">
+              <input type="number" id="modal-students" [(ngModel)]="enquiryForm.numStudents" name="numStudents" required min="1" placeholder=" ">
+              <label for="modal-students">Number of Students</label>
+            </div>
+
+            <div class="form-group">
+              <input type="text" id="modal-date" [(ngModel)]="enquiryForm.travelDate" name="travelDate" required placeholder=" ">
+              <label for="modal-date">Expected Travel Date (e.g. 15th October 2026)</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-gold submit-btn w-100" [disabled]="!f.form.valid">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            Request Quotation via WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  }
+}

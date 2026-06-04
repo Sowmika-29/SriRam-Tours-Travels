@@ -7,35 +7,22 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: $emerald-dark; // Fallback background
+  background: transparent !important; // Let global background show through
 }
 
 .hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  transform: translateY(calc(var(--scroll-y, 0) * 0.15 * 1px));
-  will-change: transform;
-
-  .zoom-bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.05);
-    animation: zoomBackground 24s ease-in-out infinite alternate;
-  }
+  display: none !important; // Hide local background image
 }
 
-// Multi-layered cinematic overlays for extreme legibility & depth
+// Subtly adjusted overlays to keep global background crystal clear & highly readable
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(11, 22, 20, 0.75) 0%,
-    rgba(11, 22, 20, 0.4) 50%,
-    rgba(11, 22, 20, 0.85) 100%
+    rgba(31, 45, 28, 0.15) 0%,
+    rgba(31, 45, 28, 0.05) 50%,
+    rgba(31, 45, 28, 0.2) 100%
   );
   z-index: 1;
 }
@@ -46,8 +33,8 @@
   background: radial-gradient(
     circle at 50% 40%,
     transparent 0%,
-    rgba(11, 22, 20, 0.3) 60%,
-    rgba(11, 22, 20, 0.7) 100%
+    rgba(31, 45, 28, 0.05) 60%,
+    rgba(31, 45, 28, 0.15) 100%
   );
   z-index: 2;
 }
