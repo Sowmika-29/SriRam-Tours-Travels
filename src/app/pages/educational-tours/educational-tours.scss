@@ -207,6 +207,7 @@
   @media (max-width: 767px) {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start; // Align items to left edge so they don't clip on left side
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
