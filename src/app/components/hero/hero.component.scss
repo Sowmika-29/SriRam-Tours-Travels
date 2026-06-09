@@ -11,7 +11,16 @@
 }
 
 .hero-bg {
-  display: none !important; // Hide local background image
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: zoomBackground 20s infinite alternate linear;
+  }
 }
 
 // Subtly adjusted overlays to keep global background crystal clear & highly readable
@@ -20,9 +29,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(31, 45, 28, 0.15) 0%,
-    rgba(31, 45, 28, 0.05) 50%,
-    rgba(31, 45, 28, 0.2) 100%
+    rgba(10, 20, 10, 0.4) 0%,
+    rgba(10, 20, 10, 0.3) 50%,
+    rgba(10, 20, 10, 0.5) 100%
   );
   z-index: 1;
 }
