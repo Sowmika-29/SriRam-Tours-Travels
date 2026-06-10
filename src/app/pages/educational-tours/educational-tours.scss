@@ -1,9 +1,62 @@
 @use '../../../styles/variables' as *;
 
+// Topographic Contour Wave Divider
+.topographic-divider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  margin-top: -140px; // Pull up over the hero section
+  z-index: 5;
+  overflow: hidden;
+  mask-image: linear-gradient(to top, black 20%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 20%, transparent 100%);
+  pointer-events: none;
+  
+  // As requested, the clip path expands upward revealing the next section's background beneath, 
+  // dissolved organically. The mask-image already creates the organic dissolve.
+  // The scroll reveal class can trigger a fade-in or expand.
+  &.scroll-reveal-fade-up, &.revealed {
+    animation: topographicPart 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes topographicPart {
+  from {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    opacity: 0;
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+}
+
+.topo-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.topo-line {
+  stroke: rgba(0, 0, 0, 0.06); // Dark stroke for light background
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+  will-change: transform;
+}
+
+// Slight horizontal irregularity and 1% translateX drift in an 8s loop
+.topo-line-1 { animation: topoDrift 8s ease-in-out infinite alternate; }
+.topo-line-2 { animation: topoDrift 8.5s ease-in-out infinite alternate-reverse; }
+.topo-line-3 { animation: topoDrift 9s ease-in-out infinite alternate; }
+.topo-line-4 { animation: topoDrift 9.5s ease-in-out infinite alternate-reverse; }
+
+@keyframes topoDrift {
+  0% { transform: translateX(-1%); }
+  100% { transform: translateX(1%); }
+}
+
 .edu-packages-section {
-  background: radial-gradient(circle at center, rgba(11, 22, 20, 0.88) 0%, rgba(6, 12, 11, 0.98) 100%) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: $beige !important;
   position: relative;
   z-index: 2;
 }
@@ -14,11 +67,13 @@
   flex-direction: column;
   gap: 24px;
   margin-bottom: 48px;
-  background: rgba($sage, 0.1);
-  padding: 32px;
-  border-radius: $radius-card;
-  border: 1px solid rgba($primary-green, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  background: rgba(18, 30, 27, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 20px 24px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
   @media (min-width: $bp-tablet) {
     flex-direction: row;
@@ -29,14 +84,14 @@
   @media (max-width: $bp-tablet) {
     padding: 20px 16px;
     gap: 16px;
-    border-radius: 16px;
+    border-radius: 24px;
   }
 }
 
 .search-box {
   position: relative;
   flex: 1;
-  max-width: 500px;
+  max-width: 450px;
   display: flex;
   align-items: center;
 
@@ -46,28 +101,38 @@
 
   .search-icon {
     position: absolute;
-    left: 16px;
-    color: $primary-green;
-    opacity: 0.7;
+    left: 20px;
+    color: $ivory;
+    opacity: 0.5;
     pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  &:focus-within .search-icon {
+    color: $gold;
+    opacity: 0.9;
   }
 
   .search-input {
     width: 100%;
-    padding: 14px 16px 14px 48px;
-    font-size: 16px;
+    padding: 14px 20px 14px 52px;
+    font-size: 15px;
     font-family: $font-body;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba($primary-green, 0.2);
-    border-radius: $radius-pill;
-    color: $text-dark;
-    transition: $transition-base;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    color: $ivory;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
 
     &:focus {
       outline: none;
-      border-color: $emerald;
-      background: white;
-      box-shadow: 0 0 0 4px rgba($emerald, 0.15);
+      border-color: rgba($gold, 0.5);
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 15px rgba($gold, 0.15);
     }
   }
 }
@@ -75,7 +140,7 @@
 .filter-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 
   @media (max-width: $bp-tablet) {
     flex-wrap: nowrap;
@@ -95,12 +160,12 @@
     font-size: 14px;
     font-weight: 500;
     font-family: $font-body;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba($primary-green, 0.15);
-    border-radius: $radius-pill;
-    color: $text-muted;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    color: rgba($ivory, 0.7);
     cursor: pointer;
-    transition: $transition-base;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     @media (max-width: $bp-tablet) {
       flex-shrink: 0;
@@ -110,338 +175,391 @@
     }
 
     &:hover {
-      background: rgba($sage, 0.2);
-      color: $text-dark;
+      background: rgba(255, 255, 255, 0.12);
+      color: $ivory;
+      transform: translateY(-1px);
     }
 
     &.active {
-      background: $emerald;
-      border-color: $emerald;
-      color: $ivory;
-      box-shadow: 0 4px 15px rgba($emerald, 0.3);
-    }
-  }
-}
-
-// Category Header & Dividers
-.category-lane-section {
-  margin-bottom: 80px;
-  
-  &:last-child {
-    margin-bottom: 40px;
-  }
-}
-
-.category-header {
-  margin-bottom: 30px;
-  
-  .category-title {
-    font-family: $font-heading;
-    font-size: 26px;
-    font-weight: 500;
-    color: $ivory;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
-
-    @media (max-width: 767px) {
-      font-size: 19px;
-    }
-
-    .category-indicator-arrow {
-      font-family: $font-body;
-      font-size: 12px;
-      font-weight: 600;
-      color: $gold;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      opacity: 0.85;
-      
-      @media (min-width: 768px) {
-        display: none; // Only show scrolling horizontal hints on mobile
-      }
-    }
-  }
-
-  .category-divider {
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, rgba($gold, 0.45) 0%, rgba(255, 255, 255, 0.08) 100%);
-  }
-}
-
-// Interconnected Honeycomb (Hexagon) Grid Layout
-.honeycomb-grid-container {
-  padding: 30px 0;
-  width: 100%;
-  overflow: visible;
-  display: flex;
-  justify-content: center;
-}
-
-.honeycomb-grid {
-  display: grid;
-  justify-content: center;
-  margin: 0 auto;
-  position: relative;
-  
-  // Desktop Placement (3 columns, staggered center column, NO OVERLAP)
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 280px);
-    gap: 15px 20px; // Tight vertical and horizontal gaps
-    width: max-content;
-    padding-bottom: 120px; // Adjusted for tighter shift
-  }
-
-  // Tablet Placement (3 columns, staggered center column, NO OVERLAP)
-  @media (min-width: 768px) and (max-width: 1023px) {
-    grid-template-columns: repeat(3, 210px);
-    gap: 10px 15px;
-    width: max-content;
-    padding-bottom: 90px;
-  }
-
-  // Mobile Horizontal Scroll Lane
-  @media (max-width: 767px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start; // Align items to left edge so they don't clip on left side
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 15px; // Tighter gap on mobile horizontal lanes
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    padding: 15px 24px 30px 24px;
-    
-    // Hide scrollbar Firefox
-    scrollbar-width: none;
-    // Hide scrollbar IE/Edge
-    -ms-overflow-style: none;
-    // Hide scrollbar Chrome/Safari
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-}
-
-// Honeycomb Card Wrapper
-.honeycomb-card-wrapper {
-  position: relative;
-  width: 100%;
-  cursor: pointer;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.5));
-  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              filter 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
-              background 0.6s ease,
-              opacity 0.6s ease;
-  will-change: transform, filter, opacity;
-  z-index: 2;
-
-  // Stagger center column on Desktop (nested tightly)
-  @media (min-width: 1024px) {
-    height: 320px;
-    
-    &:nth-child(3n+2) {
-      transform: translateY(110px);
-    }
-  }
-
-  // Stagger center column on Tablet
-  @media (min-width: 768px) and (max-width: 1023px) {
-    height: 240px;
-    
-    &:nth-child(3n+2) {
-      transform: translateY(85px);
-    }
-  }
-
-  // Desktop & Tablet Frame Styling for Hexagon Cards
-  @media (min-width: 768px) {
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    background: linear-gradient(135deg, rgba($gold, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
-    padding: 3px; // Frame thickness
-  }
-
-  // Mobile Horizontal Scroll Lane Item Styling
-  @media (max-width: 767px) {
-    flex: 0 0 170px;
-    height: 200px;
-    scroll-snap-align: start;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    background: linear-gradient(135deg, rgba($gold, 0.45) 0%, rgba(255, 255, 255, 0.12) 100%);
-    padding: 2px;
-  }
-
-  // Active hover states (scale up, deep shadow, glowing border frame)
-  &:hover {
-    transform: scale(1.05) translateY(-5px);
-    filter: drop-shadow(0 20px 40px rgba($gold, 0.35));
-    z-index: 10;
-    
-    @media (min-width: 768px) {
-      background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
-    }
-    @media (max-width: 767px) {
-      background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
-    }
-
-    .hexagon-img {
-      transform: scale(1.10);
-    }
-    
-    .hexagon-overlay {
-      background: linear-gradient(
-        to bottom,
-        rgba(10, 20, 18, 0.1) 0%,
-        rgba(10, 20, 18, 0.7) 45%,
-        rgba(10, 20, 18, 1) 100%
-      );
-    }
-    
-    .hexagon-btn {
       background: $gold;
-      color: $emerald-dark;
       border-color: $gold;
-      box-shadow: 0 4px 15px rgba($gold, 0.3);
+      color: $emerald-dark;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba($gold, 0.3);
+      transform: translateY(-1px);
     }
-  }
-
-  // Neighbor cards compress and shift down subtly
-  &.is-neighbor {
-    transform: scale(0.97) translateY(2px);
-    opacity: 0.85;
-    z-index: 1;
   }
 }
 
-// Hexagon Tile (pointy-topped)
-.hexagon-tile {
+// Hybrid Layout
+.packages-hybrid-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-bottom: 80px;
+
+  @media (max-width: $bp-tablet) {
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+// 1. Featured Editorial Layout
+.featured-editorial-wrapper {
+  width: 100%;
+}
+
+.editorial-card {
   position: relative;
+  width: 100%;
+  height: 600px;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: $bp-tablet) {
+    height: 450px;
+    border-radius: 16px;
+  }
+
+  &:hover {
+    .editorial-img {
+      transform: scale(1.05);
+    }
+    .editorial-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);
+    }
+    .premium-btn {
+      background: $gold;
+      color: $text-dark;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba($gold, 0.3);
+    }
+  }
+}
+
+.editorial-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: $emerald-dark;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  z-index: 1;
 }
 
-.hexagon-img {
+.editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+.editorial-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
+  transition: background 0.6s ease;
+}
+
+.editorial-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 60px;
+  
+  @media (max-width: $bp-tablet) {
+    padding: 30px;
+  }
+
+  .content-inner {
+    max-width: 600px;
+  }
+}
+
+.tour-type-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: $ivory;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.featured-title {
+  font-family: $font-heading;
+  font-size: 48px;
+  color: $ivory;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+
+  @media (max-width: $bp-tablet) {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+}
+
+.premium-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: $ivory;
+  color: $text-dark;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-family: $font-body;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  @media (max-width: $bp-tablet) {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+// 2. Premium Bento Grid
+.bento-grid-wrapper {
+  width: 100%;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 300px;
+  gap: 20px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 250px;
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.bento-item {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  @media (min-width: 768px) {
+    &.bento-item-1 {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    &.bento-item-4 {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    height: 250px; // Fixed height for mobile stack
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+
+    .bento-img {
+      transform: scale(1.08);
+    }
+    
+    .icon-btn {
+      background: $gold;
+      color: $text-dark;
+    }
+  }
+}
+
+.bento-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: scale(1.02);
   will-change: transform;
 }
 
-.hexagon-overlay {
+.bento-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 20, 18, 0.15) 0%,
-    rgba(10, 20, 18, 0.6) 45%,
-    rgba(10, 20, 18, 0.95) 100%
-  );
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);
   z-index: 1;
-  transition: all 0.5s ease;
 }
 
-.hexagon-content {
+.bento-content {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 30px 24px 45px 24px;
-  text-align: center;
-  box-sizing: border-box;
+  padding: 24px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bento-text {
+  flex: 1;
+  padding-right: 16px;
+
+  .tour-type {
+    display: block;
+    color: $gold;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .bento-title {
+    color: $ivory;
+    font-family: $font-heading;
+    font-size: 24px;
+    margin: 0;
+    line-height: 1.2;
+
+    @media (max-width: $bp-tablet) {
+      font-size: 20px;
+    }
+  }
+}
+
+.icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: $ivory;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+// 3. Curved Arch Destination Cards
+.arch-cards-wrapper {
+  width: 100%;
+}
+
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.arch-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  z-index: 2;
-  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  will-change: transform;
+  cursor: pointer;
   
-  @media (max-width: 767px) {
-    padding: 16px 12px 25px 12px !important;
+  &:hover {
+    .arch-image-container {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .arch-img {
+      transform: scale(1.05);
+    }
+    .text-btn {
+      color: $primary-green; // Updated hover color to green since background is beige
+      transform: translateX(5px);
+    }
   }
 }
 
-.hexagon-type {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  color: $gold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background: rgba(11, 22, 20, 0.6);
-  border: 1px solid rgba($gold, 0.35);
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  
-  @media (max-width: 767px) {
-    font-size: 8px !important;
-    padding: 2px 8px !important;
-    margin-bottom: 6px !important;
-    letter-spacing: 1px !important;
-  }
+.arch-image-container {
+  width: 100%;
+  height: 380px;
+  border-radius: 140px 140px 20px 20px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.hexagon-title {
-  font-family: $font-heading;
-  font-size: 21px;
-  font-weight: 400;
-  color: $ivory;
-  margin: 8px 0;
-  line-height: 1.3;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-  max-width: 220px;
-  
-  @media (max-width: 767px) {
-    font-size: 14px !important;
-    margin: 4px 0 !important;
-    max-width: 140px !important;
-  }
+.arch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.hexagon-btn {
-  display: inline-block;
-  margin-top: 16px;
+.arch-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%);
+  pointer-events: none;
+}
+
+.arch-content {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.tour-type-minimal {
+  display: block;
   font-size: 11px;
   font-weight: 600;
-  color: $ivory;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba($gold, 0.5);
-  padding: 8px 18px;
-  border-radius: 30px;
+  color: $primary-green; // Updated for better contrast on beige
   text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.95;
-  transition: all 0.4s ease;
-  
-  @media (max-width: 767px) {
-    margin-top: 8px !important;
-    font-size: 8px !important;
-    padding: 4px 10px !important;
-    letter-spacing: 0.5px !important;
-  }
+  letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 
-.view-more-wrapper {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
+.arch-title {
+  font-family: $font-heading;
+  font-size: 22px;
+  color: $text-dark; // Updated from ivory to dark
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: $text-dark; // Updated from ivory to dark
+  font-family: $font-body;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
 }
 
 // No Results Block
@@ -460,13 +578,14 @@
   
   h3 {
     font-family: $font-heading;
+    color: $text-dark; // Updated from ivory
     font-size: 28px;
-    color: $text-dark;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
+  
   p {
-    color: $text-muted;
-    max-width: 450px;
+    color: $text-muted; // Updated from rgba($ivory, 0.7)
+    font-size: 16px;
     margin: 0 auto;
   }
 }

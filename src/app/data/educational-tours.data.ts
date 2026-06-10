@@ -46,7 +46,7 @@ export const BASE_PACKAGES = [
     summary: 'Explore the rolling tea plantations, lush greenery, and scenic beauty of Munnar with an exciting Jeep ride before heading back.',
     category: 'School Tours (1 Day)' as const,
     keyAttractions: ['Munnar Tea Estates', 'Jeep Ride', 'Scenic Viewpoints'],
-    image: 'https://images.unsplash.com/photo-1625553200007-1ea025f1a928?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1589982441121-817ab9bc7144?w=800&q=80'
   },
   {
     title: 'Godavari Package',

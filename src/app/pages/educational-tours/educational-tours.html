@@ -9,6 +9,16 @@
   </div>
 </section>
 
+<!-- Topographic Contour Wave Divider -->
+<div class="topographic-divider-wrapper" scrollReveal>
+  <svg class="topo-svg" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="topo-line topo-line-1" d="M-100,20 C150,60 350,-20 600,40 C850,100 1050,-10 1300,50" fill="none" />
+    <path class="topo-line topo-line-2" d="M-100,45 C150,85 350,5 600,65 C850,125 1050,15 1300,75" fill="none" />
+    <path class="topo-line topo-line-3" d="M-100,70 C150,110 350,30 600,90 C850,150 1050,40 1300,100" fill="none" />
+    <path class="topo-line topo-line-4" d="M-100,95 C150,135 350,55 600,115 C850,175 1050,65 1300,125" fill="none" />
+  </svg>
+</div>
+
 <section class="edu-packages-section section-padding">
   <div class="container">
     
@@ -37,57 +47,82 @@
       </div>
     </div>
 
-    <!-- Grouped Honeycomb Package Categories -->
-    <div class="categories-wrapper">
-      @for (cat of visibleCategories; track cat) {
-        @if (getFilteredPackagesByCategory(cat).length > 0) {
-          <div class="category-lane-section" scrollReveal>
-            <div class="category-header">
-              <h2 class="category-title">
-                {{ cat }}
-                @if (cat.includes('School')) {
-                  <span class="category-indicator-arrow">School Tours &rarr;</span>
-                } @else {
-                  <span class="category-indicator-arrow">College Tours &rarr;</span>
-                }
-              </h2>
-              <div class="category-divider"></div>
+    <!-- Hybrid Layout Wrapper -->
+    <div class="packages-hybrid-layout">
+      @if (filteredPackages.length > 0) {
+        
+        <!-- 1. Luxury Editorial Magazine Layout (Featured) -->
+        <div class="featured-editorial-wrapper" scrollReveal>
+          @let featured = filteredPackages[0];
+          <div class="editorial-card" [routerLink]="['/' + getCategoryPath(featured.category), featured.slug]">
+            <div class="editorial-image-wrapper">
+              <img [src]="featured.image" [alt]="featured.title" class="editorial-img" loading="lazy">
+              <div class="editorial-overlay"></div>
             </div>
-
-            <!-- Honeycomb Grid container -->
-            <div class="honeycomb-grid-container">
-              <div class="honeycomb-grid">
-                @for (pkg of getFilteredPackagesByCategory(cat); track pkg.slug; let idx = $index) {
-                  <div class="honeycomb-card-wrapper" 
-                       [class.is-neighbor]="isNeighbor(idx)"
-                       (mouseenter)="onCellMouseEnter(idx)"
-                       (mouseleave)="onCellMouseLeave()"
-                       [routerLink]="['/' + getCategoryPath(pkg.category), pkg.slug]">
-                    
-                    <div class="hexagon-tile">
-                      <!-- Destination Image -->
-                      <img [src]="pkg.image" [alt]="pkg.title" class="hexagon-img" loading="lazy">
-                      
-                      <!-- Cinematic overlay -->
-                      <div class="hexagon-overlay"></div>
-                      
-                      <!-- Content overlay -->
-                      <div class="hexagon-content">
-                        <span class="hexagon-type">{{ pkg.category.includes('School') ? 'School Tour' : 'College Tour' }}</span>
-                        <h3 class="hexagon-title">{{ pkg.title }}</h3>
-                        <span class="hexagon-btn">View Details</span>
-                      </div>
-                    </div>
-                    
-                  </div>
-                }
+            <div class="editorial-content">
+              <div class="content-inner">
+                <span class="tour-type-badge">{{ featured.category.includes('School') ? 'School Tour' : 'College Tour' }}</span>
+                <h2 class="featured-title">{{ featured.title }}</h2>
+                <button class="premium-btn">
+                  <span>View Package</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
-        }
-      }
+        </div>
 
-      @if (hasNoSearchResults()) {
+        <!-- 2. Premium Bento Grid Layout -->
+        @if (filteredPackages.length > 1) {
+          <div class="bento-grid-wrapper" scrollReveal>
+            <div class="bento-grid">
+              @for (pkg of filteredPackages | slice:1:5; track pkg.slug; let i = $index) {
+                <div class="bento-item" [class]="'bento-item-' + (i + 1)" [routerLink]="['/' + getCategoryPath(pkg.category), pkg.slug]">
+                  <img [src]="pkg.image" [alt]="pkg.title" class="bento-img" loading="lazy">
+                  <div class="bento-overlay"></div>
+                  <div class="bento-content">
+                    <div class="bento-text">
+                      <span class="tour-type">{{ pkg.category.includes('School') ? 'School Tour' : 'College Tour' }}</span>
+                      <h3 class="bento-title">{{ pkg.title }}</h3>
+                    </div>
+                    <button class="icon-btn">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- 3. Curved Arch Destination Cards -->
+        @if (filteredPackages.length > 5) {
+          <div class="arch-cards-wrapper" scrollReveal>
+            <div class="arch-grid">
+              @for (pkg of filteredPackages | slice:5; track pkg.slug) {
+                <div class="arch-card" [routerLink]="['/' + getCategoryPath(pkg.category), pkg.slug]">
+                  <div class="arch-image-container">
+                    <img [src]="pkg.image" [alt]="pkg.title" class="arch-img" loading="lazy">
+                    <div class="arch-overlay"></div>
+                  </div>
+                  <div class="arch-content">
+                    <span class="tour-type-minimal">{{ pkg.category.includes('School') ? 'School Tour' : 'College Tour' }}</span>
+                    <h3 class="arch-title">{{ pkg.title }}</h3>
+                    <button class="text-btn">View Package &rarr;</button>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+      } @else {
         <div class="no-results glass-card text-center w-100 padding-all" scrollReveal>
           <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="margin-bottom-medium color-gold">
             <circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>
