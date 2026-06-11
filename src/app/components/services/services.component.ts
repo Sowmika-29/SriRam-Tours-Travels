@@ -19,7 +19,7 @@ export class ServicesComponent {
 
   services: ServiceItem[] = [
     { image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=80', title: 'Tourism & Travel', desc: 'Curated domestic and international packages' },
-    { image: 'images/bus.jpeg', title: 'Bus For Rental', desc: 'AC & Non-AC buses for all occasions' },
+    { image: '/images/bus.jpeg', title: 'Bus For Rental', desc: 'AC & Non-AC buses for all occasions' },
     { image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80', title: 'School / College Trips', desc: 'Safe, fun educational excursions' },
     { image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&q=80', title: 'Mobile Catering', desc: 'Veg & Non-Veg on-the-go dining' },
     { image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&q=80', title: 'Flight Ticket Booking', desc: 'Best deals on domestic & international flights' },

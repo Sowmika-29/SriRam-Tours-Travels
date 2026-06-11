@@ -18,7 +18,7 @@ export class FleetComponent {
     capacity: '45 seats',
     features: ['Recliner seats', 'USB charging', 'Music system', 'WiFi'],
     bestFor: 'Long tours, Corporate trips, Weddings',
-    image: 'images/bus.jpeg'
+    image: '/images/bus.jpeg'
   };
 
   constructor(

@@ -56,7 +56,7 @@
           @let featured = filteredPackages[0];
           <div class="editorial-card" [routerLink]="['/' + getCategoryPath(featured.category), featured.slug]">
             <div class="editorial-image-wrapper">
-              <img [src]="featured.image" [alt]="featured.title" class="editorial-img" loading="lazy">
+              <img [src]="featured.image" [alt]="featured.title" class="editorial-img">
               <div class="editorial-overlay"></div>
             </div>
             <div class="editorial-content">
@@ -81,7 +81,7 @@
             <div class="bento-grid">
               @for (pkg of filteredPackages | slice:1:5; track pkg.slug; let i = $index) {
                 <div class="bento-item" [class]="'bento-item-' + (i + 1)" [routerLink]="['/' + getCategoryPath(pkg.category), pkg.slug]">
-                  <img [src]="pkg.image" [alt]="pkg.title" class="bento-img" loading="lazy">
+                  <img [src]="pkg.image" [alt]="pkg.title" class="bento-img">
                   <div class="bento-overlay"></div>
                   <div class="bento-content">
                     <div class="bento-text">
@@ -103,12 +103,12 @@
 
         <!-- 3. Curved Arch Destination Cards -->
         @if (filteredPackages.length > 5) {
-          <div class="arch-cards-wrapper" scrollReveal>
+          <div class="arch-cards-wrapper">
             <div class="arch-grid">
-              @for (pkg of filteredPackages | slice:5; track pkg.slug) {
-                <div class="arch-card" [routerLink]="['/' + getCategoryPath(pkg.category), pkg.slug]">
+              @for (pkg of filteredPackages | slice:5; track pkg.slug; let i = $index) {
+                <div class="arch-card" scrollReveal [revealDelay]="(i % 3) * 100" [routerLink]="['/' + getCategoryPath(pkg.category), pkg.slug]">
                   <div class="arch-image-container">
-                    <img [src]="pkg.image" [alt]="pkg.title" class="arch-img" loading="lazy">
+                    <img [src]="pkg.image" [alt]="pkg.title" class="arch-img">
                     <div class="arch-overlay"></div>
                   </div>
                   <div class="arch-content">
