@@ -151,7 +151,7 @@
           @for (img of package.gallery; track img; let i = $index) {
             <div class="gallery-item-block" [class]="'block-size-' + (i % 3)" scrollReveal [revealDelay]="i * 50">
               <div class="gallery-img-wrapper">
-                <img [src]="img" [alt]="package.title + ' Gallery ' + i" loading="lazy">
+                <img [src]="img" [alt]="package.title + ' Gallery ' + i">
                 <div class="gallery-reveal-overlay"></div>
               </div>
             </div>

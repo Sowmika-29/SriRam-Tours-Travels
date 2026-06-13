@@ -46,7 +46,7 @@ export const BASE_PACKAGES = [
     summary: 'Explore the rolling tea plantations, lush greenery, and scenic beauty of Munnar with an exciting Jeep ride before heading back.',
     category: 'School Tours (1 Day)' as const,
     keyAttractions: ['Munnar Tea Estates', 'Jeep Ride', 'Scenic Viewpoints'],
-    image: 'https://images.unsplash.com/photo-1589982441121-817ab9bc7144?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Godavari Package',
@@ -70,7 +70,7 @@ export const BASE_PACKAGES = [
     summary: 'Embark on a spiritual and historical tour visiting Thiruvannamalai temple, Sathanur Dam, the spectacular Sripuram Golden Temple, and Vellore Fort.',
     category: 'School Tours (1 Day)' as const,
     keyAttractions: ['Thiruvannamalai Temple', 'Sathanur Dam', 'Sripuram Golden Temple', 'Vellore Fort'],
-    image: 'https://images.unsplash.com/photo-1590050752117-238cb0612b1b?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Poombukar & Velankanni Package',
@@ -94,7 +94,7 @@ export const BASE_PACKAGES = [
     summary: 'Study Dravidian temple art and architecture across Thanjavur Palace, Swamimalai, Kumbakonam temples, and the sacred Mahamaham Lake.',
     category: 'School Tours (1 Day)' as const,
     keyAttractions: ['Periya Kovil', 'Thanjavur Palace', 'Swamimalai', 'Kumbakonam Temples', 'Mahamaham Lake'],
-    image: 'https://images.unsplash.com/photo-1600100397990-24b32252c4b4?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Madurai & Pazhamuthirsolai Package',
@@ -102,7 +102,7 @@ export const BASE_PACKAGES = [
     summary: 'A journey into the heart of Madurai featuring Pazhamuthirsolai Murugan temple, Nayakkar Mahal, the glorious Meenakshi Amman Temple, and Vaigai Dam.',
     category: 'School Tours (1 Day)' as const,
     keyAttractions: ['Pazhamuthirsolai Temple', 'Nayakkar Mahal', 'Meenakshi Amman Temple', 'Vaigai Dam'],
-    image: 'https://images.unsplash.com/photo-1609137144813-176847847bd6?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Kutralam Package',
@@ -126,7 +126,7 @@ export const BASE_PACKAGES = [
     summary: 'Geological study at Pillar Rocks, nature walks along Coaker\'s Walk, Suicide Point, Ooty-like Kodaikanal Lake boating, and Vaigai Dam.',
     category: 'School Tours (1 Day)' as const,
     keyAttractions: ['Pillar Rocks', 'Coaker\'s Walk', 'Kodaikanal Lake Boating', 'Vaigai Dam'],
-    image: 'https://images.unsplash.com/photo-1589982441121-817ab9bc7144?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Thekkadi & Vaigai Dam Package',
@@ -232,7 +232,7 @@ export const BASE_PACKAGES = [
     summary: 'Day 1: Madurai Meenakshi Temple, Nayakkar Palace, Thiruparankundram. Day 2: Old Kutralam, Five Falls, Thiruchendur shore temple, Chinthalakarai.',
     category: 'College Tours (2 Days)' as const,
     keyAttractions: ['Meenakshi Temple', 'Nayakkar Mahal', 'Kutralam Waterfalls', 'Thiruchendur Temple'],
-    image: 'https://images.unsplash.com/photo-1609137144813-176847847bd6?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Kanyakumari & Kerala Nature Package',
@@ -258,7 +258,7 @@ export const BASE_PACKAGES = [
     summary: 'Day 1: Mysore Palace, Chamundi Hills, Brindavan Gardens. Day 2: Coorg Abbey Falls, Dubare Elephant Camp, Golden Temple. Day 3: Chikmagalur peak trek.',
     category: 'College Tours (3 Days)' as const,
     keyAttractions: ['Mysore Palace', 'Dubare Elephant Camp', 'Abbey Falls Coorg', 'Chikmagalur Peak Trek'],
-    image: 'https://images.unsplash.com/photo-1600100397990-24b32252c4b4?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Vibe Karnataka Heritage & Adventure',
@@ -266,7 +266,7 @@ export const BASE_PACKAGES = [
     summary: 'Day 1: Mysore Palace, Chamundi Hill. Day 2: Dandeli River Rafting, forest safari. Day 3: Chikmagalur hills, Udupi Krishna temple and Malpe beach.',
     category: 'College Tours (3 Days)' as const,
     keyAttractions: ['Mysore Heritage', 'Dandeli Water Rafting', 'Chikmagalur Peak', 'Udupi Malpe Beach'],
-    image: 'https://images.unsplash.com/photo-1590050752117-238cb0612b1b?w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
   },
   {
     title: 'Hyderabad Package',
@@ -358,9 +358,9 @@ const PACKAGE_OVERRIDES: Record<string, Partial<TourPackageDetails>> = {
       }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1600100397990-24b32252c4b4?w=800&q=80',
-      'https://images.unsplash.com/photo-1590050752117-238cb0612b1b?w=800&q=80',
-      'https://images.unsplash.com/photo-1609137144813-176847847bd6?w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
       'https://images.unsplash.com/photo-1544085311-11a028465b03?w=800&q=80'
     ]
   },
@@ -495,8 +495,8 @@ const PACKAGE_OVERRIDES: Record<string, Partial<TourPackageDetails>> = {
       }
     ],
     gallery: [
-      'https://images.unsplash.com/photo-1600100397990-24b32252c4b4?w=800&q=80',
-      'https://images.unsplash.com/photo-1590050752117-238cb0612b1b?w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
       'https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=800&q=80',
       'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
     ]
@@ -542,8 +542,8 @@ const PACKAGE_OVERRIDES: Record<string, Partial<TourPackageDetails>> = {
     gallery: [
       'https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?w=800&q=80',
       'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=800&q=80',
-      'https://images.unsplash.com/photo-1600100397990-24b32252c4b4?w=800&q=80',
-      'https://images.unsplash.com/photo-1590050752117-238cb0612b1b?w=800&q=80'
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80'
     ]
   }
 };

@@ -8,7 +8,7 @@
     <div class="fleet-centered-container" scrollReveal>
       <div class="fleet-card-large" tiltCard>
         <div class="fleet-image-section">
-          <img [src]="flagshipVehicle.image" [alt]="flagshipVehicle.type" loading="lazy" (error)="onImageError($event)">
+          <img [src]="flagshipVehicle.image" [alt]="flagshipVehicle.type" (error)="onImageError($event)">
           <div class="fleet-image-overlay"></div>
           <div class="fleet-badge-large">{{ flagshipVehicle.capacity }}</div>
         </div>

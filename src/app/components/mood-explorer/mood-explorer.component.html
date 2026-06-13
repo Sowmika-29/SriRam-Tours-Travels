@@ -10,7 +10,7 @@
              [class]="'mood-tile tile-' + i"
              scrollReveal [revealDelay]="i * 100"
              (click)="selectMood(mood.name)">
-          <img [src]="mood.image" [alt]="mood.name" loading="lazy">
+          <img [src]="mood.image" [alt]="mood.name">
           <div class="mood-overlay"></div>
           <div class="mood-content">
             <span class="mood-icon" [innerHTML]="mood.icon"></span>
@@ -43,7 +43,7 @@
         @for (dest of activeDestinations; track dest.name) {
           <div class="dest-item-card">
             <div class="dest-img-wrapper">
-              <img [src]="dest.image" [alt]="dest.name" loading="lazy">
+              <img [src]="dest.image" [alt]="dest.name">
               <span class="dest-type-badge" [class.intl]="dest.type === 'International'">{{ dest.type }}</span>
             </div>
             <div class="dest-info">
